@@ -1,0 +1,44 @@
+.tab :hover{
+    background-color: #AABBCC;
+}
+.current-tab{
+    margin-left: 20px;
+}
+.tab a{
+    padding: 9px 18px;
+
+}
+.title-bar{
+    display: flex;
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+#title-bar a {
+    color: #000;
+    text-decoration: none;
+}
+
+#title-left{
+    float: left;
+    width: 30%;
+    padding-left: 30px;
+    text-align: left;
+}
+#title-left a{
+    font: normal 1.2em serif;
+    border-bottom: 1px solid #CCC;
+    padding-bottom: 20px;
+}
+#title-left span {
+    font: normal 1.5em serif;
+    color: #999;
+}
+#title-right{
+    float: left;
+    width: 69%;
+}
+#navigation{
+    border-top: 1px solid #CCC;
+    border-bottom: 1px solid #CCC;
+}

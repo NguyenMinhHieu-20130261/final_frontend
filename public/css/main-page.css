@@ -380,16 +380,6 @@ img.alignright, img.right {margin: 0 0 1em 1.5em;}
 #header {margin-bottom: 24px;}
 
 /* Site title */
-#site-title {
-    font: normal 1.6em serif;
-    border-bottom: 1px solid #CCC;
-    padding-bottom: 24px;
-}
-#site-title span {color: #999;}
-#site-title a {
-    color: #000;
-    text-decoration: none;
-}
 
 
 /* Navigation */
@@ -404,25 +394,9 @@ img.alignright, img.right {margin: 0 0 1em 1.5em;}
 
 #main-nav a {
     color: #888;
-    font-size: 1.5em;
-    padding: 9px 14px;
+    font-size: 1.5em !important;
 }
-/*#main-nav li {background: url('img/navigation-separator.gif') no-repeat left center;}*/
-#main-nav li:first-child a {background: none;}
 #main-nav li.current-tab a, #main-nav a:hover {color: #002;}
-/*#main-nav li.current-tab {background: url('img/navigation-arrow.gif') no-repeat center bottom;}*/
-
-
-/* Subnav */
-
-#sub-nav {background: #DDEDF7; padding: 0 5px;}
-#sub-nav a {
-    color: #678;
-    font: bold 1.2em sans-serif;
-    padding: 10px;
-}
-#sub-nav li.current-tab a, #sub-nav a:hover {color: #223;}
-
 
 /* Main */
 
@@ -536,3 +510,21 @@ img.alignright, img.right {margin: 0 0 1em 1.5em;}
 .norpadding {padding-right: 0;}
 .nobpadding {padding-bottom: 0;}
 .nolpadding {padding-left: 0;}
+
+/*PostColumn*/
+.post-container{
+    margin: 9px 0px;
+    text-align: left;
+}
+#picture{
+    width: 125px;
+    height: 70px;
+    background-color: red;
+    border: 2px solid cadetblue;
+    margin-right: 10px;
+}
+.post{
+    border-bottom: 1px solid #CCCC;
+    border-top: 1px solid #CCCC;
+    margin: 15px 0px ;
+}
