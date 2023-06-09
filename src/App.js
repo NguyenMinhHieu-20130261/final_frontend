@@ -1,9 +1,9 @@
 
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
-import PostColumn from "./components/MainPage";
 import Network from "./components/layout/Network";
 import '../src/assets/css/main.css'
+import {Home} from "./components/MainPage";
 
 function App() {
   return (
@@ -12,6 +12,7 @@ function App() {
         <div id="site">
             <div className="center-wrapper">
                 <Header/>
+                <Home></Home>
                 <Footer/>
             </div>
         </div>
