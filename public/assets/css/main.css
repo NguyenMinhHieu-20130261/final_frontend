@@ -39,34 +39,27 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 /*//////////////////////////////////////////////////////////////////
 [ FONT ]*/
 
-/*------------------------------------------------------------------
-[ 1 ]*/
-@font-face {
-  font-family: Roboto-Regular;
-  src: url('fontsegular.ttf');
-}
 
-@font-face {
-  font-family: Roboto-Medium;
-  src: url('fontsedium.ttf');
-}
+/*@font-face {*/
+/*  font-family: Roboto-Regular;*/
+/*  src: url('fontsegular.ttf');*/
+/*}*/
 
-@font-face {
-  font-family: Roboto-Bold;
-  src: url('fontsold.ttf');
-}
+/*@font-face {*/
+/*  font-family: Roboto-Medium;*/
+/*  src: url('fontsedium.ttf');*/
+/*}*/
 
-@font-face {
-  font-family: Roboto-Black;
-  src: url('fontslack.ttf');
-}
+/*@font-face {*/
+/*  font-family: Roboto-Bold;*/
+/*  src: url('fontsold.ttf');*/
+/*}*/
 
-/*------------------------------------------------------------------
-[ 2 ]*/
-@font-face {
-  font-family: Lato-Regular;
-  src: url('fontsular.ttf');
-}
+/*@font-face {*/
+/*  font-family: Roboto-Black;*/
+/*  src: url('fontslack.ttf');*/
+/*}*/
+
 
 
 /*//////////////////////////////////////////////////////////////////
@@ -84,10 +77,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
 

@@ -2,16 +2,15 @@
     background-color: #AABBCC;
 }
 .current-tab{
-    margin-left: 20px;
+    margin-left: 10px;
 }
 .tab a{
-    padding: 9px 18px;
+    padding: 9px 20px;
 
 }
 .title-bar{
     display: flex;
     width: 100%;
-    padding-bottom: 10px;
 }
 
 #title-bar a {
