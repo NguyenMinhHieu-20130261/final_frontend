@@ -1,0 +1,50 @@
+.site-title{
+    height: auto;
+    font-size: 50px;
+    padding: 20px 24px;
+    font-family:  Roboto;
+    border-bottom: 1px black;
+    display: flex;
+}
+.title-link{
+    display: flex;
+}
+.title-link img{
+    margin: 9px 25px 0 25px;
+    width: 40px;
+    height: 40px;
+}
+.site-title a{
+    text-decoration: none;
+    color: black;
+}
+.main-menu li a{
+    text-decoration: none;
+}
+.site-title-footer{
+    height: auto;
+    font-size: 40px;
+}
+.site-title-footer a{
+    text-decoration: none;
+    color: white;
+}
+.footer-icon{
+    background-color: white;
+    margin: 1px 25px 0 25px;
+    width: 40px;
+    height: 40px;
+}
+.nav-container {
+    display: flex;
+}
+#search-bar{
+    margin: 0 25px 5px 25px;
+    height: auto;
+}
+#search-bar input{
+    padding-left: 15px ;
+}
+.footer-link a{
+    text-decoration: none;
+}
