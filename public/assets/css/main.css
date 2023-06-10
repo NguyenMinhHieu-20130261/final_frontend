@@ -43,29 +43,29 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 [ 1 ]*/
 @font-face {
   font-family: Roboto-Regular;
-  src: url('fontsegular.ttf');
+  src: url('../fonts/Roboto/Roboto-Regular.ttf'); 
 }
 
 @font-face {
   font-family: Roboto-Medium;
-  src: url('fontsedium.ttf');
+  src: url('../fonts/Roboto/Roboto-Medium.ttf'); 
 }
 
 @font-face {
   font-family: Roboto-Bold;
-  src: url('fontsold.ttf');
+  src: url('../fonts/Roboto/Roboto-Bold.ttf'); 
 }
 
 @font-face {
   font-family: Roboto-Black;
-  src: url('fontslack.ttf');
+  src: url('../fonts/Roboto/Roboto-Black.ttf'); 
 }
 
 /*------------------------------------------------------------------
 [ 2 ]*/
 @font-face {
   font-family: Lato-Regular;
-  src: url('fontsular.ttf');
+  src: url('../fonts/Lato/Lato-Regular.ttf'); 
 }
 
 
@@ -1602,6 +1602,7 @@ a.breadcrumb-item:hover {
 /*---------------------------------------------*/
 .how-txt1 {
   white-space: normal;
+  display: box;
   display:-moz-box;
   display:-webkit-box;
   -webkit-line-clamp: 2;
@@ -1613,6 +1614,7 @@ a.breadcrumb-item:hover {
 /*---------------------------------------------*/
 .how-txt2 {
   white-space: normal;
+  display: box;
   display:-moz-box;
   display:-webkit-box;
   -webkit-line-clamp: 1;
