@@ -39,27 +39,34 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 /*//////////////////////////////////////////////////////////////////
 [ FONT ]*/
 
+/*------------------------------------------------------------------
+[ 1 ]*/
+@font-face {
+  font-family: Roboto-Regular;
+  src: url('../fonts/Roboto/Roboto-Regular.ttf'); 
+}
 
-/*@font-face {*/
-/*  font-family: Roboto-Regular;*/
-/*  src: url('fontsegular.ttf');*/
-/*}*/
+@font-face {
+  font-family: Roboto-Medium;
+  src: url('../fonts/Roboto/Roboto-Medium.ttf'); 
+}
 
-/*@font-face {*/
-/*  font-family: Roboto-Medium;*/
-/*  src: url('fontsedium.ttf');*/
-/*}*/
+@font-face {
+  font-family: Roboto-Bold;
+  src: url('../fonts/Roboto/Roboto-Bold.ttf'); 
+}
 
-/*@font-face {*/
-/*  font-family: Roboto-Bold;*/
-/*  src: url('fontsold.ttf');*/
-/*}*/
+@font-face {
+  font-family: Roboto-Black;
+  src: url('../fonts/Roboto/Roboto-Black.ttf'); 
+}
 
-/*@font-face {*/
-/*  font-family: Roboto-Black;*/
-/*  src: url('fontslack.ttf');*/
-/*}*/
-
+/*------------------------------------------------------------------
+[ 2 ]*/
+@font-face {
+  font-family: Lato-Regular;
+  src: url('../fonts/Lato/Lato-Regular.ttf'); 
+}
 
 
 /*//////////////////////////////////////////////////////////////////
@@ -77,7 +84,10 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   position: absolute;
   top: 50%;
   left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
 
@@ -1592,6 +1602,7 @@ a.breadcrumb-item:hover {
 /*---------------------------------------------*/
 .how-txt1 {
   white-space: normal;
+  display: box;
   display:-moz-box;
   display:-webkit-box;
   -webkit-line-clamp: 2;
@@ -1603,6 +1614,7 @@ a.breadcrumb-item:hover {
 /*---------------------------------------------*/
 .how-txt2 {
   white-space: normal;
+  display: box;
   display:-moz-box;
   display:-webkit-box;
   -webkit-line-clamp: 1;
