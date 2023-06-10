@@ -1,175 +1,313 @@
 import React from 'react';
 
-const PostColumn = () => {
+const PostItem = () => {
     return (
-        <div className="post">
-            <a href="#">
-                {/*<img src="news-image-small-1.jpg" alt="" className="left bordered"/>*/}
-                <div id="picture" class="left bordered"></div>
-            </a>
-            <h3>
-                <a href="#">Tiêu đề</a>
-            </h3>
-            <p>Integer diam elit, condimentum ac semper ut, tincidunt non diam. Ut congue rutrum justo at commodo.
-                Aenean euismod tincidunt lorem scelerisque euismod.</p>
-            <a href="#" className="more">Đọc thêm &#187;</a>
-            <div className="clearer">&nbsp;</div>
-        </div>
-    );
-};
-const LatestList = () => {
-    return(
-        <li>
-            <div className="left"><a href="#">Tin tức list...</a></div>
-            <div className="right">20.49</div>
-            <div className="clearer">&nbsp;</div>
-        </li>
-    )
-}
-const MostViewedList = () => {
-    return(
-        <li>
-            <div className="left"><a href="#">Tin tức list...</a></div>
-            <div className="right">20.49</div>
-            <div className="clearer">&nbsp;</div>
-        </li>
-    )
-}
-const ColumnContent = () => {
-    return(
-        <div className="column-content">
-            <div className="post">
-                <p><a href="#">
-                    <img src="news-image-med-1.jpg" alt="" className="bordered"/>
-                </a></p>
-                <h4><a href="#">Curabitur justo arcu</a></h4>
-                Bibendum at bibendum in, semper nec ibh.
+        <div className="flex-wr-sb-s m-b-30">
+            <a href="blog-detail-01.html" className="size-w-1 wrap-pic-w hov1 trans-03">
+                Pic
+                </a>
+            <div className="size-w-2">
+                <h5 className="p-b-5">
+                    <a href="blog-detail-01.html" className="f1-s-5 cl3 hov-cl10 trans-03">
+                        Donec metus orci, malesuada et lectus vitae
+                    </a>
+                </h5>
+                <span className="cl8">
+                    <a href="#" className="f1-s-6 cl8 hov-cl10 trans-03">
+                        Music
+                    </a>
+
+                    <span className="f1-s-3 m-rl-3">
+                        -
+                    </span>
+
+                    <span className="f1-s-3">
+                        Feb 17
+                    </span>
+                </span>
             </div>
         </div>
     )
 }
-const LeftSideContent = () =>{
-    return(
-        <div className="post">
-            <p><a href="#"><img src="news-image-small-1.jpg" alt="" className="bordered"/></a></p>
-            <h3><a href="#">Tiêu đề</a></h3>
-            <p>Integer diam elit, condimentum ac semper ut, tincidunt non diam. Ut congue rutrum justo at commodo.
-                Aenean euismod tincidunt lorem scelerisque euismod.</p>
-            <a href="#" className="more">Xem thêm &#187;</a>
-        </div>
-    )
-}
-const MainPost = () => {
+const PostMain = () => {
     return (
-        <div className="post">
-            <div className="post-title">
-                <h2><a href="#">Template Information</a></h2>
-            </div>
-            <div className="post-date">18:11, Sunday, August 2, 2009 by Viktor Persson</div>
-            <div className="post-body">
-                <p><a href="#"><img src="news-image-big.jpg" alt="" className="bordered"/></a></p>
-                <p className="large">This is a free website template by Arcsin, built using tableless XHTML and CSS.</p>
-                <p>This template is distributed under a Creative Commons Attribution 2.5 License, which allows you to
-                    use and modify it for any purpose (personal and commercial), under the condition that you keep the
-                    provided credit links in the footer.</p>
-                <p>The latest template version and CMS conversions for platforms such as WordPress and Blogger can be
-                    found at the official Simple Magazine website template page.</p>
-                <p>For more templates, questions and comments please visit Arcsin Web Templates.</p>
-                <a href="#" className="more">Xem thêm &#187;</a></div>
-        </div>
-    )
-}
-const Latest = () => {
-    return (
-        <div className="section latest">
-            <div className="section-title">
-                <div className="left">Tin tức mới nhất</div>
-                <div className="right"><img src="img/icon-time.gif" width="14" height="14" alt=""/></div>
-                <div className="clearer">&nbsp;</div>
-            </div>
-            <div className="section-content">
-                <ul className="nice-list">
-                    <LatestList></LatestList>
+        <div className="col-sm-6 p-r-25 p-r-15-sr991">
+            <div className="m-b-30">
+                <a href="blog-detail-01.html" className="wrap-pic-w hov1 trans-03">
+                    MainPostPic
+                </a>
+                <div className="p-t-20">
+                    <h5 className="p-b-5">
+                        <a href="blog-detail-01.html" className="f1-m-3 cl2 hov-cl10 trans-03">
+                            American live music lorem ipsum dolor sit amet consectetur
+                        </a>
+                    </h5>
 
-                    <LatestList></LatestList>
+                    <span className="cl8">
+                        <a href="#" className="f1-s-4 cl8 hov-cl10 trans-03">
+                            Music
+                        </a>
 
-                    <LatestList></LatestList>
+                        <span className="f1-s-3 m-rl-3">
+                            -
+                        </span>
 
-                    <LatestList></LatestList>
-
-                    <LatestList></LatestList>
-
-                    <LatestList></LatestList>
-
-                    <li><a href="#" className="more">Xem thêm &#187;</a></li>
-                </ul>
-            </div>
-        </div>
-    )
-}
-const MostViewed = () => {
-    return (
-        <div className="section most-viewed">
-            <div className="section-title">Tin được theo dõi nhiều nhất</div>
-            <div className="section-content">
-                <ul className="nice-list">
-                    <MostViewedList></MostViewedList>
-
-                    <MostViewedList></MostViewedList>
-
-                    <MostViewedList></MostViewedList>
-
-                    <MostViewedList></MostViewedList>
-
-                    <MostViewedList></MostViewedList>
-
-                    <li><a href="#" className="more">Xem thêm...&#187;</a></li>
-                </ul>
-            </div>
-        </div>
-    )
-}
-export const Home = () => {
-    return (
-        <div className="main" id="main-three-columns">
-            <div className="left" id="main-left">
-                <MainPost></MainPost>
-                <div className="content-separator"></div>
-                <PostColumn></PostColumn>
-                <div className="col3 left">
-                    <ColumnContent></ColumnContent>
+                        <span className="f1-s-3">
+                            Feb 18
+                        </span>
+                    </span>
                 </div>
-                <div className="col3 col3-mid left">
-                    <ColumnContent></ColumnContent>
-                </div>
-                <div className="col3 right">
-                    <ColumnContent></ColumnContent>
-                </div>
-                <div className="clearer">&nbsp;</div>
             </div>
-            <div className="left sidebar" id="sidebar-1">
-                <LeftSideContent></LeftSideContent>
-                <LeftSideContent></LeftSideContent>
-                <LeftSideContent></LeftSideContent>
-            </div>
-            <div className="right sidebar" id="sidebar-2">
-                <Latest></Latest>
-                <MostViewed></MostViewed>
-                <div className="section network-section">
-                    <div className="section-title">Tin tức Network</div>
-                    <div className="section-content">
-                        <ul className="nice-list">
-                            <li><a href="#">Nullam eros</a></li>
-                            <li><a href="#">Eleifend nec tortor</a></li>
-                            <li><a href="#">Duis mi lectus</a></li>
-                            <li><a href="#">Integer diam elit</a></li>
-                            <li><a href="#">Enim dapibus venenatis</a></li>
-                            <li><a href="#" className="more">Visit Network Site &#187;</a></li>
+        </div>
+    )
+}
+const PostBody = () => {
+    return(
+        <div className="col-md-10 col-lg-8">
+            <div className="p-b-20">
+                <div className="tab01 p-b-20">
+                    <div className="tab01-head how2 how2-cl1 bocl12 flex-s-c m-r-10 m-r-0-sr991">
+                        <h3 className="f1-m-2 cl12 tab01-title">
+                            Title
+                        </h3>
+                        <ul className="nav nav-tabs" role="tablist">
+                            <li className="nav-item">
+                                <a className="nav-link active" data-toggle="tab" href="#tab1-1" role="tab"></a>
+                            </li>
                         </ul>
+                        <a href="category-01.html" className="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
+                            Xem thêm
+                            <i className="fs-12 m-l-5 fa fa-caret-right"></i>
+                        </a>
+                    </div>
+
+                    <div className="tab-content p-t-35">
+                        <div className="tab-pane fade show active" id="tab1-1" role="tabpanel">
+                            <div className="row">
+                                <PostMain></PostMain>
+                                <div className="col-sm-6 p-r-25 p-r-15-sr991">
+                                    <PostItem></PostItem>
+                                    <PostItem></PostItem>
+                                    <PostItem></PostItem>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div className="clearer">&nbsp;</div>
         </div>
     )
+}
+const LeftMostViewed = () => {
+  return (
+      <div>
+          <div className="how2 how2-cl4 flex-s-c">
+              <h3 className="f1-m-2 cl3 tab01-title">
+                  Tin tức nổi bật nhất
+              </h3>
+          </div>
+
+          <ul className="p-t-35">
+              <li className="flex-wr-sb-s p-b-22">
+                  <div className="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
+                      1
+                  </div>
+
+                  <a href="#" className="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                  </a>
+              </li>
+
+              <li className="flex-wr-sb-s p-b-22">
+                  <div className="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
+                      2
+                  </div>
+
+                  <a href="#" className="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
+                      Proin velit consectetur non neque
+                  </a>
+              </li>
+
+              <li className="flex-wr-sb-s p-b-22">
+                  <div className="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
+                      3
+                  </div>
+
+                  <a href="#" className="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
+                      Nunc vestibulum, enim vitae condimentum volutpat lobortis ante
+                  </a>
+              </li>
+
+              <li className="flex-wr-sb-s p-b-22">
+                  <div className="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
+                      4
+                  </div>
+
+                  <a href="#" className="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
+                      Proin velit justo consectetur non neque elementum
+                  </a>
+              </li>
+
+              <li className="flex-wr-sb-s p-b-22">
+                  <div className="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0">
+                      5
+                  </div>
+
+                  <a href="#" className="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
+                      Proin velit consectetur non neque
+                  </a>
+              </li>
+          </ul>
+      </div>
+
+  )
+}
+const Post = () => {
+  return(
+      <section className="bg0 p-t-70">
+          <div className="container">
+              <div className="row justify-content-center">
+
+                  <PostBody></PostBody>
+
+                  <div className="col-md-10 col-lg-4">
+                      <div className="p-l-10 p-rl-0-sr991 p-b-20">
+
+                          <LeftMostViewed></LeftMostViewed>
+
+                          <div className="flex-c-s p-t-8">
+                              <a href="#">
+                                  imgBanner
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+  )
+}
+const LatestItem = () => {
+  return(
+      <div className="m-b-45">
+          <a href="blog-detail-01.html" className="wrap-pic-w hov1 trans-03">
+              LatestPostImg
+          </a>
+          <div className="p-t-16">
+              <h5 className="p-b-5">
+                  <a href="blog-detail-01.html" className="f1-m-3 cl2 hov-cl10 trans-03">
+                      You wish lorem ipsum dolor sit amet consectetur
+                  </a>
+              </h5>
+
+              <span className="cl8">
+                    <a href="#" className="f1-s-4 cl8 hov-cl10 trans-03">
+                        by John Alvarado
+                    </a>
+
+                    <span className="f1-s-3 m-rl-3">
+                        -
+                    </span>
+
+                    <span className="f1-s-3">
+                        Feb 18
+                    </span>
+                </span>
+          </div>
+      </div>
+  )
+}
+const Tag = () => {
+  return(
+      <div className="p-b-55">
+          <div className="how2 how2-cl4 flex-s-c m-b-30">
+              <h3 className="f1-m-2 cl3 tab01-title">
+                  Tags
+              </h3>
+          </div>
+
+          <div className="flex-wr-s-s m-rl--5">
+              <a href="#"
+                 className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                  Fashion
+              </a>
+
+              <a href="#"
+                 className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                  Lifestyle
+              </a>
+
+              <a href="#"
+                 className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                  Denim
+              </a>
+
+              <a href="#"
+                 className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                  Streetstyle
+              </a>
+
+              <a href="#"
+                 className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                  Crafts
+              </a>
+
+              <a href="#"
+                 className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                  Magazine
+              </a>
+
+              <a href="#"
+                 className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                  News
+              </a>
+
+              <a href="#"
+                 className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                  Blogs
+              </a>
+          </div>
+      </div>
+  )
+}
+const LatestPost = () => {
+    return(
+        <section className="bg0 p-t-60 p-b-35">
+            <div className="container">
+                <div className="row justify-content-center">
+                    <div className="col-md-10 col-lg-8 p-b-20">
+                        <div className="how2 how2-cl4 flex-s-c m-r-10 m-r-0-sr991">
+                            <h3 className="f1-m-2 cl3 tab01-title">
+                                Tin tức mới nhất
+                            </h3>
+                        </div>
+                        <div className="row p-t-35">
+                            <div className="col-sm-6 p-r-25 p-r-15-sr991">
+                                <LatestItem></LatestItem>
+                            </div>
+                        </div>
+                        <div className="row p-t-35">
+                            <div className="col-sm-6 p-r-25 p-r-15-sr991">
+                                <LatestItem></LatestItem>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="col-md-10 col-lg-4">
+                        <div className="p-l-10 p-rl-0-sr991 p-b-20">
+                            <Tag></Tag>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    )
+}
+export const Home = () => {
+  return(
+      <div className="main-page">
+          <Post></Post>
+          <LatestPost></LatestPost>
+      </div>
+  );
 }
