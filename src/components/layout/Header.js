@@ -39,7 +39,7 @@ const Header = () => {
                                         <Link to={"home"}>Trang chủ</Link>
                                     </li>
                                     <li className="mega-menu-item">
-                                        <Link to={"thoi-su"}>Trong Nước</Link>
+                                        <Link to={"category"}>Trong Nước</Link>
                                     </li>
 
                                     <li className="mega-menu-item">
