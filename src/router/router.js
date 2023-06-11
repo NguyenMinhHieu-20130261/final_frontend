@@ -1,22 +1,23 @@
 import {createBrowserRouter} from "react-router-dom";
 import {Home} from "../components/MainPage";
-import {Detail} from "../components/NewDetails";
+import {loadNewDetails, NewsDetails} from "../components/NewDetails";
 import App from "../App";
 
 export const router = createBrowserRouter([{
     element: <App/>,
     path: "/",
-    children:[
+    children: [
         {
-            path:"",
-            element:<Home/>
-        },{
-            path:"home",
-            element:<Home/>
+            path: "",
+            element: <Home/>
+        }, {
+            path: "home",
+            element: <Home/>
         }
-        // ,{
-        // path:"detail",
-        //     element:<Detail/>
-        // }
-        ]
+        , {
+            path: "detail",
+            element: <NewsDetails/>,
+            loader: loadNewDetails
+        }
+    ]
 }]);
