@@ -1,5 +1,6 @@
 import React from 'react';
 import icon from "./icon/newspaper.png"
+import {Link} from "react-router-dom";
 const SearchBar = () => {
     return(
         <div className="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-6" id="search-bar">
@@ -16,12 +17,12 @@ const Header = () => {
         <header>
             <div className="container-menu-desktop">
                 <div className="site-title">
-                    <a href="index.html" className="title-link">
+                    <Link to={"/home"} className="title-link">
                         <img src={icon}></img>
                         <h2>
                             Báo BaHắt
                         </h2>
-                    </a>
+                    </Link>
                 </div>
 
                 <div className="wrap-main-nav">
@@ -30,7 +31,7 @@ const Header = () => {
                             <div className="nav-container">
                                 <ul className="main-menu">
                                     <li className="main-menu-active">
-                                        <a href="index.html">Trang chủ</a>
+                                        <Link to={"/home"}>Trang chủ</Link>
                                     </li>
 
                                     <li className="mega-menu-item">
