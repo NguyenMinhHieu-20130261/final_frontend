@@ -1,8 +1,8 @@
 
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
-import {Home} from "./components/MainPage";
 import {Outlet} from "react-router";
+import cors from "cors";
 
 function App() {
   return (

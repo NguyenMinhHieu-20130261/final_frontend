@@ -20,7 +20,12 @@ const Footer = () => {
 
                             <div>
                                 <p className="f1-s-1 cl11 p-b-16">
-
+                                    Chào mừng các bạn đã đến với trang tin tức <b>BaHawst</b> của chúng tôi.
+                                    <br/>
+                                    Chúng tôi luôn cập nhật những tin tức trong mọi lĩnh vực kinh tế,
+                                    sức khỏe, giáo dục, pháp luật và còn các lĩnh vực khác nữa.
+                                    <br/>
+                                    Hãy luôn đón chờ những tin tức mới nhất nha!
                                 </p>
 
                                 <p className="f1-s-1 cl11 p-b-16">
