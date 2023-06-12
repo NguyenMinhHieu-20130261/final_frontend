@@ -1,8 +1,7 @@
 import {createBrowserRouter} from "react-router-dom";
 import {Home} from "../components/MainPage";
-import BreadCrumb, {Detail} from "../components/NewDetails";
+import {loadList, Category} from "../components/Category";
 import App from "../App";
-import {Category} from "../components/Category";
 
 export const router = createBrowserRouter([{
     element: <App/>,
@@ -16,8 +15,9 @@ export const router = createBrowserRouter([{
             element:<Home/>
         },
         {
-            path:"category",
-            element:<Category/>
+            path:":cate",
+            element:<Category/>,
+            loader: loadList
         }
     ]
 }]);

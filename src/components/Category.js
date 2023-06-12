@@ -1,29 +1,27 @@
 import React from "react";
+import {cateData} from "../category-data/cateData";
+import {useLoaderData} from "react-router";
+import {Link} from "react-router-dom";
 
-const BreadCrumb = () => {
+const BreadCrumb = (params) => {
     return (
         <div className="container">
             <div className="bg0 flex-wr-sb-c p-rl-20 p-tb-8">
                 <div className="f2-s-1 p-r-30 m-tb-6">
-                    <a href="index.html" className="breadcrumb-item f1-s-3 cl9">
-                        Home
-                    </a>
-                    <a href="category-02.html" className="breadcrumb-item f1-s-3 cl9">
-                        Category
-                    </a>
-                    <span className="breadcrumb-item f1-s-3 cl9">
-					Entertaiment
-				</span>
+                    <Link to={"/"} className="breadcrumb-item f1-s-3 cl9">
+                        Trang Chủ
+                    </Link>
+                    <span className="breadcrumb-item f1-s-3 cl9">{params.cate}</span>
                 </div>
             </div>
         </div>
     );
 }
-const Title = () => {
+const Title = (params) => {
     return (
         <div className="container p-t-4 p-b-40">
             <h2 className="f1-l-1 cl2">
-                Entertaiment
+                {params.cate}
             </h2>
         </div>
     )
@@ -327,12 +325,16 @@ const LastestItem = () => {
     )
 }
 export const Category = () => {
-    return (
-        <div>
-            <BreadCrumb/>
-            <Title/>
-            <PostNews/>
-            <Post/>
-        </div>
-    );
+    const cate = useLoaderData();
+    console.log(typeof cate)
+    return (cate ? <div>
+        <BreadCrumb cate={cate.name}/>
+        <Title cate={cate.name}/>>
+        <Post key={cate.cate} cate={cate.cate}/>>
+    </div> : <div></div>)
+}
+export async function loadList({params}) {
+    const cate = cateData.find(item => item.cate === params.cate);
+    console.log(cate)
+    return (typeof cate === 'undefined' ? null : cate);
 }
