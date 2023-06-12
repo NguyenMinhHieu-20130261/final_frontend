@@ -43,3 +43,28 @@ const RssPage = (page) => {
     }, [page]);
     return rssItems;
 }
+export const RssDetails = (titleUrl) => {
+    const [newsDetail, setNewsDetail] = useState(null);
+    const cheerio = require('cheerio');
+
+    useEffect(() => {
+        async function getPost() {
+            await axios.get(titleUrl).then(response => {
+                const $ = cheerio.load(response.data);
+                const title = $("h1.title-content").text();
+                const date = $("p.dateandcat.clearfix").text();
+                const sapo = $("h2.sapo-detail").text();
+                const contents = $("div.content-news-detail").contents()
+                const range = document.createRange();
+                const entryBodyFragment = range.createContextualFragment(contents);
+                const result = {title: title, date: date, sapo: sapo, contents: entryBodyFragment}
+                setNewsDetail(result)
+            }).catch(error => {
+                console.log(error);
+            });
+        }
+
+        getPost();
+    }, [titleUrl, cheerio]);
+    return newsDetail;
+}
