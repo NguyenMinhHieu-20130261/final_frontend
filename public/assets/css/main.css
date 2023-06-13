@@ -1178,6 +1178,7 @@ a.breadcrumb-item:hover {
   font-family: Roboto-Regular;
   font-size: 12px;
   line-height: 1.7;
+  display: revert;
 }
 
 .f1-s-4 {
