@@ -2,6 +2,7 @@ import React from "react";
 import {cateData} from "../category-data/cateData";
 import {useLoaderData} from "react-router";
 import {Link} from "react-router-dom";
+import {RssPage} from "../RSS/rss.js";
 
 const BreadCrumb = (params) => {
     return (
@@ -325,6 +326,7 @@ const LastestItem = () => {
     )
 }
 export const Category = () => {
+    console.log(RssPage("123"))
     const cate = useLoaderData();
     console.log(typeof cate)
     return (cate ? <div>
@@ -335,6 +337,5 @@ export const Category = () => {
 }
 export async function loadList({params}) {
     const cate = cateData.find(item => item.cate === params.cate);
-    console.log(cate)
     return (typeof cate === 'undefined' ? null : cate);
 }

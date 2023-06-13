@@ -1,21 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import Parser from 'rss-parser';
 import axios from "axios";
 import {parseString} from 'xml2js';
-const RssPage = (page) => {
+export const RssPage = (page) => {
     const [rssItems, setRssItems] = useState([]);
     useEffect(() => {
         const urltest = '/api/tin-moi-nhat.rss';
         const url = `/api/${page}.rss`;
-        const parser = new Parser();
-        // parser.parseURL(url, (err, feed) => {
-        //     if (err) throw err;
-        //     setRssItems(feed.items);
-        // });
-        // return (
-        //     console.log(rssItems)
-        // )
-        axios.get(url)
+
+        axios.get(urltest)
             .then(res => {
                 const xml = res.data;
                 // parser.
@@ -42,4 +34,6 @@ const RssPage = (page) => {
             .catch(error => console.log(error));
     }, [page]);
     return rssItems;
+
 }
+
