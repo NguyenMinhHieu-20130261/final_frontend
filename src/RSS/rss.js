@@ -35,7 +35,6 @@ export const RssPage = (page) => {
             .catch(error => console.log(error));
     }, [page]);
     return rssItems;
-
 }
 
 export const RssDetails = (titleUrl) => {
