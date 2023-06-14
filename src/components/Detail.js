@@ -6,27 +6,25 @@ import NewContent from "./NewContent";
 
 
 export const Breadcrumb = (props) => {
-    return (<div className="container">
-        <div className="headline bg0 flex-wr-sb-c p-rl-20 p-tb-8">
-            <div className="f2-s-1 p-r-30 m-tb-6">
-                <Link to={'/home'} className="breadcrumb-item f1-s-3 cl9">
-                    Trang chủ
-                </Link>
-                <Link to={`/${props.cate}`} className="breadcrumb-item f1-s-3 cl9">
-                    {cateData.find(item => item.cate === props.cate).name}
-                </Link>
-                <span className="breadcrumb-item f1-s-3 cl9">
-					 {props.title}
-                </span>
+    return (
+        <div className="row">
+            <div className="col-lg-12">
+                <div className="trending-tittle">
+                    <div className="trending-animated" style={{display: "flex"}}>
+                        <Link to={'/home'} className="item home">Trang chủ</Link>
+                        <Link to={`/${props.cate}`}
+                              className="item cate"> / {cateData.find(item => item.cate === props.cate).name}</Link>
+                        <span className="item title"> / {props.title}</span>
+                    </div>
+
+                </div>
             </div>
         </div>
-    </div>)
+    )
 }
 export const MainContent = (props) => {
-    return (<div className="col-md-10 col-lg-8 p-b-30">
-        <div className="p-r-10 p-r-0-sr991">
+    return (<div className="col-md-10 col-lg-8">
             <NewContent post={props.post} cate={props.cate}/>
-        </div>
     </div>)
 }
 
@@ -126,89 +124,106 @@ export const PopularPosts = () => {
     </div>)
 }
 
-export const Tags = () => {
-    return (<div>
-        <div className="how2 how2-cl4 flex-s-c m-b-30">
-            <h3 className="f1-m-2 cl3 tab01-title">
-                Tags
-            </h3>
+export const FollowTitle = () => {
+    return (
+        <div className="section-tittle mb-40">
+            <h3>Follow Us</h3>
         </div>
-
-        <div className="flex-wr-s-s m-rl--5">
-            <a href="#"
-               className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                Fashion
-            </a>
-
-            <a href="#"
-               className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                Lifestyle
-            </a>
-
-            <a href="#"
-               className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                Denim
-            </a>
-
-            <a href="#"
-               className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                Streetstyle
-            </a>
-
-            <a href="#"
-               className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                Crafts
-            </a>
-
-            <a href="#"
-               className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                Magazine
-            </a>
-
-            <a href="#"
-               className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                News
-            </a>
-
-            <a href="#"
-               className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                Blogs
-            </a>
+    )
+}
+export const FollowSocial = () => {
+    return (
+        <div className="single-follow mb-45">
+            <div className="single-box">
+                <div className="follow-us d-flex align-items-center">
+                    <div className="follow-social">
+                        <a href="#"><img src="assets/img/news/icon-fb.png" alt=""/></a>
+                    </div>
+                    <div className="follow-count">
+                        <span>8,045</span>
+                        <p>Fans</p>
+                    </div>
+                </div>
+                <div className="follow-us d-flex align-items-center">
+                    <div className="follow-social">
+                        <a href="#"><img src="assets/img/news/icon-tw.png" alt=""/></a>
+                    </div>
+                    <div className="follow-count">
+                        <span>8,045</span>
+                        <p>Fans</p>
+                    </div>
+                </div>
+                <div className="follow-us d-flex align-items-center">
+                    <div className="follow-social">
+                        <a href="#"><img src="assets/img/news/icon-ins.png" alt=""/></a>
+                    </div>
+                    <div className="follow-count">
+                        <span>8,045</span>
+                        <p>Fans</p>
+                    </div>
+                </div>
+                <div className="follow-us d-flex align-items-center">
+                    <div className="follow-social">
+                        <a href="#"><img src="assets/img/news/icon-yo.png" alt=""/></a>
+                    </div>
+                    <div className="follow-count">
+                        <span>8,045</span>
+                        <p>Fans</p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>)
+    )
 }
 
-export const Sidebar = () => {
-    return (<div className="col-md-10 col-lg-4 p-b-30">
-        <div className="p-l-10 p-rl-0-sr991 p-t-70">
-            <PopularPosts></PopularPosts>
-            <Tags></Tags>
+export const Banner = () => {
+    return (
+        <div className="news-poster d-none d-lg-block">
+            <img src="assets/img/news/news_card.jpg" alt=""/>
         </div>
-    </div>)
+    )
+}
+export const Sidebar = () => {
+    return (
+        <div className="col-lg-4">
+            <FollowTitle></FollowTitle>
+            <FollowSocial></FollowSocial>
+            <Banner></Banner>
+            <PopularPosts></PopularPosts>
+        </div>
+    )
 }
 
 export const Content = (props) => {
-    return (<section className="bg0 p-b-140 p-t-10">
-        <div className="container">
-            <div className="row justify-content-center">
+    return (
+            <div className="row">
                 <MainContent post={props.post} cate={props.cate}></MainContent>
                 <Sidebar></Sidebar>
             </div>
-        </div>
-    </section>)
+    )
 }
 
 export function Detail() {
     const data = useLoaderData();
     const memoizedUrl = useMemo(() => data.link, [data]);
     const post = RssDetails(memoizedUrl);
-    return (<div key={data.link}>
-        {post ? (<div><Breadcrumb key={data} cate={data.cate} title={post.title}/>
-            <Content key={post} post={post} cate={data.cate}/></div>) : (
-            <h4 style={{textAlign: "center", marginBottom: "50px", marginTop: "50px"}}> Đang hiển thị chi
-                tiết... </h4>)}
-    </div>)
+    return (
+        <div className="about-area">
+            <div className="container">
+                <div key={data.link}>
+                    {post ? (
+                        <div><Breadcrumb key={data} cate={data.cate} title={post.title}/>
+                            <Content key={post} post={post} cate={data.cate}/></div>
+                    ) : (
+                        <h4 style={{textAlign: "center", marginBottom: "50px", marginTop: "50px"}}> Đang hiển thị chi
+                            tiết... </h4>)}
+                </div>
+            </div>
+        </div>
+
+    )
 }
+
 export function loadDetail({params}) {
     const link = `/api/` + params.cate + "/" + params.title + ".htm";
     sessionStorage.setItem("link", `/` + params.cate + "/" + params.title + ".htm");
