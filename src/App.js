@@ -7,9 +7,9 @@ function App() {
       <div className="App">
         <div id="site">
             <div className="center-wrapper">
-                <Header/>
+                {/*<Header/>*/}
                 <Outlet/>
-                <Footer/>
+                {/*<Footer/>*/}
             </div>
         </div>
       </div>
