@@ -58,12 +58,12 @@ const Header = () => {
                                     <div className="main-menu d-none d-md-block">
                                         <nav>
                                             <ul id="navigation">
-                                                <li><a href="index.html">Trang Chủ</a></li>
-                                                <li><a href="categori.html">Tin mới nhất</a></li>
-                                                <li><a href="about.html">Trong nước</a></li>
-                                                <li><a href="latest_news.html">Quốc Tế</a></li>
-                                                <li><a href="contact.html">Kinh tế</a></li>
-                                                <li><a href="contact.html">Sức Khỏe</a></li>
+                                                <li><Link to={"/home"}>Trang Chủ</Link></li>
+                                                <li><Link to={"/tin-moi-nhat"}>Tin mới nhất</Link></li>
+                                                <li><Link to={"/thoi-su"}>Trong nước</Link></li>
+                                                <li><Link to={"/thoi-su-quoc-te"}>Quốc Tế</Link></li>
+                                                <li><Link to={"/kinh-te"}>Kinh tế</Link></li>
+                                                <li><Link to={"/suc-khoe"}>Sức Khỏe</Link></li>
 
                                                 <li><a href="#">Khác</a>
                                                     <ul className="submenu">
