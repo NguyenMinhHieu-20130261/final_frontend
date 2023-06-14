@@ -15,49 +15,69 @@ function NewContent(props) {
             contentRef.current.appendChild(datacontent)
         }
     }, [datacontent]);
-    return (<div className="p-b-70">
-        <Link to={`/${props.cate}`} className="f1-s-10 cl2 hov-cl10 trans-03 text-uppercase">
+    return (<div className="p-b-70" style={{marginRight:"56px"}}>
+        <Link to={`/${props.cate}`} className="text-uppercase" style={{fontSize:"13px"}}>
             {cateData.find(item => item.cate === props.cate).name}
         </Link>
-        <h3 className="f1-l-3 cl2 p-b-20 p-t-33 respon2">
+        <h3 className="respon2" style={{marginTop:"20px", marginBottom:"20px"}}>
             {content.title}
         </h3>
-        <div className="flex-wr-s-s p-b-17" style={{alignItems: "center"}}>
+        <div style={{alignItems: "center"}}>
 								<span className="f1-s-3 cl8 m-r-15">
 									<span>
 										{content.date}
 									</span>
 								</span>
         </div>
-        <h5 className={"sapo p-b-15"}>{content.sapo}</h5>
+        <h5 className={"sapo"} style={{marginTop:"10px"}}>{content.sapo}</h5>
 
         <div className={"main-content"} ref={contentRef}/>
 
 
         <div className="flex-s-s" style={{display:"flex"}}>
-            <span className="f1-s-12 cl5 p-t-1 m-r-15" style={{paddingTop: "12px", marginRight: "20px"}}>
+            <span style={{paddingTop: "12px", marginRight: "20px"}}>
                 Share:
             </span>
-            <div className="flex-wr-s-s size-w-0" style={{cursor:"pointer"}}>
-                <ShareFbButton/>
+            <div style={{cursor:"pointer"}}>
+                <FacebookShare/>
+                <TwitterShare/>
             </div>
         </div>
     </div>)
 }
 
-function ShareFbButton() {
+function FacebookShare() {
     const handleFbShare = () => {
-        const urlToShare = "https://nld.com.vn" + sessionStorage.getItem("link"); // URL của tin tức muốn chia sẻ
+        // Lấy url của tin tức muốn chia sẻ
+        const urlToShare = "https://nld.com.vn" + sessionStorage.getItem("link");
         const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(urlToShare)}`;
         window.open(facebookShareUrl, '_blank');
     };
 
     return (
         <a onClick={handleFbShare}
-           className="dis-block f1-s-13 cl0 bg-facebook borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03"
-           style={{color: "white"}}>
+           className="f1-s-13 cl0 bg-facebook hov-btn1"
+           style={{color: "white", marginRight:"30px"}}>
             <i className="fab fa-facebook-f m-r-7" style={{margin:"10px"}}></i>
             Facebook
+        </a>
+    );
+}
+
+function TwitterShare() {
+    const ShareTwitterButton = () => {
+        // Lấy URL của tin tức muốn chia sẻ
+        const urlToShare = "https://nld.com.vn" + sessionStorage.getItem("link");
+        const twitterShareUrl = `https://twitter.com/share?url=${encodeURIComponent(urlToShare)}`;
+        window.open(twitterShareUrl, '_blank');
+    };
+
+    return (
+        <a onClick={ShareTwitterButton}
+           className="f1-s-13 cl0 bg-twitter hov-btn1"
+           style={{color: "white"}}>
+            <i className="fab fa-twitter m-r-7" style={{margin:"10px"}}></i>
+            Twitter
         </a>
     );
 }

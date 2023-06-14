@@ -6622,6 +6622,7 @@ b, sup, sub, u, del {
     margin-bottom: 10px
 }
 
+
 .hov-btn1:hover {
     background-color: #17b978;
     border-color: #17b978;
@@ -6637,4 +6638,7 @@ b, sup, sub, u, del {
 
 .bg-facebook {
     background-color: #3b5998;
+}
+.bg-twitter {
+    background-color: #1da1f2;
 }

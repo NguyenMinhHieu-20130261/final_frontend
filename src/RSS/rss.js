@@ -21,7 +21,7 @@ export const RssPage = (page) => {
                             const imgLink = imgUrlMatch ? imgUrlMatch[1] : null;
                             return{
                                 title : item.title[0],
-                                desc : cleanedDescription,
+                                desc : cleanedDesc,
                                 pubDate : item.pubDate[0],
                                 guid : item.guid[0],
                                 link : item.link[0],
