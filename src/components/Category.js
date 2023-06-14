@@ -326,9 +326,9 @@ const LastestItem = () => {
     )
 }
 export const Category = () => {
-    console.log(RssPage("123"))
+    console.log(RssPage("tin-moi-nhat"));
     const cate = useLoaderData();
-    console.log(typeof cate)
+    console.log(typeof cate);
     return (cate ? <div>
         <BreadCrumb cate={cate.name}/>
         <Title cate={cate.name}/>>

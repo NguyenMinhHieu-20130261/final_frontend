@@ -1,0 +1,9 @@
+.header-right-btn{
+    display: flex; !important;
+}
+.magnify{
+    margin-right: 15px ;
+}
+.search-bar{
+    padding: 0 10px;
+}

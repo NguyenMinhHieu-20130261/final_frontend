@@ -6,11 +6,9 @@ export const RssPage = (page) => {
     useEffect(() => {
         const urltest = '/api/tin-moi-nhat.rss';
         const url = `/api/${page}.rss`;
-
-        axios.get(urltest)
+        axios.get(url)
             .then(res => {
                 const xml = res.data;
-                // parser.
                 parseString(xml,(err, feed) => {
                     if(err === true){
                         console.log(err);
@@ -18,13 +16,16 @@ export const RssPage = (page) => {
                         const content = feed.rss.channel[0].item.map(item =>{
                             const desc = item.description[0];
                             const cleanedDesc = desc.replace(/<\/?(a|img)[^>]*>/g, '');
-                            const img = /<img.*?scr="(.*?)"/;
+                            const imgUrlRegex = /<img.*?src="(.*?)"/;
+                            const imgUrlMatch = desc.match(imgUrlRegex);
+                            const imgLink = imgUrlMatch ? imgUrlMatch[1] : null;
                             return{
                                 title : item.title[0],
                                 desc : cleanedDesc,
                                 pubDate : item.pubDate[0],
                                 guid : item.guid[0],
                                 link : item.link[0],
+                                img : imgLink
                             }
                         });
                         setRssItems(content);
