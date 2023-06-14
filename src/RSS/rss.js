@@ -4,10 +4,9 @@ import {parseString} from 'xml2js';
 export const RssPage = (page) => {
     const [rssItems, setRssItems] = useState([]);
     useEffect(() => {
-        const urltest = '/api/tin-moi-nhat.rss';
+        // const urltest = '/api/tin-moi-nhat.rss';
         const url = `/api/${page}.rss`;
-
-        axios.get(urltest)
+        axios.get(url)
             .then(res => {
                 const xml = res.data;
                 // parser.
@@ -16,15 +15,18 @@ export const RssPage = (page) => {
                         console.log(err);
                     } else {
                         const content = feed.rss.channel[0].item.map(item =>{
-                            const desc = item.description[0];
-                            const cleanedDesc = desc.replace(/<\/?(a|img)[^>]*>/g, '');
-                            const img = /<img.*?scr="(.*?)"/;
+                            const description = item.description[0];
+                            const imageUrlRegex = /<img.*?src="(.*?)"/;
+                            const imageUrlMatch = description.match(imageUrlRegex);
+                            const img = imageUrlMatch ? imageUrlMatch[1] : null;
+                            const cleanedDescription = description.replace(/<\/?(a|img)[^>]*>/g, '').replace(/&#\d+;/g, '');
                             return{
                                 title : item.title[0],
-                                desc : cleanedDesc,
+                                desc : cleanedDescription,
                                 pubDate : item.pubDate[0],
                                 guid : item.guid[0],
                                 link : item.link[0],
+                                img: img
                             }
                         });
                         setRssItems(content);
