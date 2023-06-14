@@ -1,41 +1,39 @@
 import React, {useEffect, useState} from "react";
-import {RssPage} from "../RSS/rss";
 import {Link} from "react-router-dom";
-import {useLoaderData} from "react-router";
-import {cateData} from "../category-data/cateData";
 
 const PostLeft = (params) => {
-    const listPost = RssPage(params.cate)
+    const listPost = params.list
     const [currentPage, setCurrentPage] = useState(1)
     const [listPostOnePage, setListPostOnePage] = useState(null)
     let numberPage = []
     let postNumber = 8
     let pageTotal = Math.ceil(listPost.length / postNumber)
 
-
     useEffect(() => {
         if (listPost) {
             let start = (currentPage - 1) * postNumber;
             let end = start + postNumber;
-            let post = listPost.slice(start,end)
+            let post = listPost.slice(start, end)
             setListPostOnePage(post);
-            console.log(listPost.slice(start,end))
-            console.log(listPostOnePage)
         }
-    },[listPost,currentPage])
+    }, [listPost, currentPage])
+
     function nextPage(page) {
         setCurrentPage(page)
     }
+
     for (let i = 0; i < pageTotal; i++) {
-        let page = i+1
+        let page = i + 1
         numberPage.push(<li className="page-item active">
-            <a className="page-link" onClick={() => {nextPage(page)}}>{page}</a>
+            <a className="page-link" onClick={() => {
+                nextPage(page)
+            }}>{page}</a>
         </li>)
     }
     return (
         <div className="col-lg-8">
             <ListCategory/>
-            {listPostOnePage? <ListPost cate={params.cate} name={params.name} list={listPostOnePage} key={listPostOnePage}/> : <div></div>}
+            {listPostOnePage ? <ListPost list={listPostOnePage}/> : <div></div>}
             <div className="pagination-area pb-45 text-center">
                 <div className="container">
                     <div className="row">
@@ -43,11 +41,7 @@ const PostLeft = (params) => {
                             <div className="single-wrap d-flex justify-content-center">
                                 <nav aria-label="Page navigation example">
                                     <ul className="pagination justify-content-start">
-                                        {/*<li className="page-item"><a className="page-link" href="#"><span*/}
-                                        {/*    className="flaticon-arrow roted"></span></a></li>*/}
                                         {numberPage}
-                                        {/*<li className="page-item"><a className="page-link" href="#"><span*/}
-                                        {/*    className="flaticon-arrow right-arrow"></span></a></li>*/}
                                     </ul>
                                 </nav>
                             </div>
@@ -59,7 +53,7 @@ const PostLeft = (params) => {
     )
 }
 const ListCategory = () => {
-    return(
+    return (
         <div className="row d-flex justify-content-between">
             <div className="col-lg-3 col-md-3">
                 <div className="section-tittle mb-30">
@@ -72,13 +66,15 @@ const ListCategory = () => {
                         <div className="nav nav-tabs" id="nav-tab" role="tablist">
                             <Link to={"/thoi-su"} className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
                                   role="tab" aria-controls="nav-profile" aria-selected="false">Trong Nước</Link>
-                            <Link to={"/thoi-su-quoc-te"} className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
+                            <Link to={"/thoi-su-quoc-te"} className="nav-item nav-link" id="nav-profile-tab"
+                                  data-toggle="tab"
                                   role="tab" aria-controls="nav-profile" aria-selected="false">Quốc Tế</Link>
                             <Link to={"/kinh-te"} className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
                                   role="tab" aria-controls="nav-profile" aria-selected="false">Kinh Tế</Link>
                             <Link to={"/suc-khoe"} className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
                                   role="tab" aria-controls="nav-profile" aria-selected="false">Sức Khỏe</Link>
-                            <Link to={"/giao-duc-khoa-hoc"} className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
+                            <Link to={"/giao-duc-khoa-hoc"} className="nav-item nav-link" id="nav-profile-tab"
+                                  data-toggle="tab"
                                   role="tab" aria-controls="nav-profile" aria-selected="false">Giáo Dục</Link>
                         </div>
                     </nav>
@@ -88,15 +84,25 @@ const ListCategory = () => {
     )
 }
 const ListPost = (params) => {
+    let item = []
+    if (params.list) {
+        for (let i = 0; i < params.list.length; i++) {
+            item.push(<PostItem cate={params.list[i].cate}
+                                title={params.list[i].title}
+                                link={params.list[i].link}
+                                img={params.list[i].img}
+                                name={params.list[i].name}/>)
+        }
+    }
     return (
         <div className="row">
             <div className="col-12">
                 <div className="tab-content" id="nav-tabContent">
-                    <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <div className="tab-pane fade show active" id="nav-home" role="tabpanel"
+                         aria-labelledby="nav-home-tab">
                         <div className="whats-news-caption">
                             <div className="row">
-                                {params.list.map(item => <PostItem cate={params.cate} title={item.title} desc={item.desc}
-                                                                   link={item.link} img={item.img} name={params.name}/>)}
+                                {item ? item : <div></div>}
                             </div>
                         </div>
                     </div>
@@ -114,6 +120,7 @@ const PostItem = (params) => {
         list.push(item)
         localStorage.setItem("history", JSON.stringify(list))
     }
+
     return (
         <div className="col-lg-6 col-md-6">
             <div className="single-what-news mb-100">
@@ -122,8 +129,8 @@ const PostItem = (params) => {
                 </div>
                 <div className="what-cap">
                     <span className="color1">{params.name}</span>
-                    <h4><Link to={`/${params.link.substring(20, params.link.indexOf(".htm"))}`}
-                              onClick={() => {historyPost({cate:params.cate, link:params.link, img:params.img})}}>{params.title}</Link></h4>
+                    <h4><Link to={`/${params.link.substring(20, params.link.indexOf(".htm"))}`}>{params.title}</Link>
+                    </h4>
                 </div>
             </div>
         </div>
@@ -182,21 +189,18 @@ const PostRight = () => {
     )
 }
 export const History = () => {
-    const listHistory = localStorage.getItem("history")
-    console.log(listHistory)
-    return (listHistory ?
-        <div>
-            <section className="whats-news-area pt-50 pb-20">
-                <div className="container">
-                    <div className="row">
-                        <PostLeft />
-                        <PostRight/>
-                    </div>
+    let listHistory = JSON.parse(localStorage.getItem("history"))
+    if (listHistory === null) {
+        listHistory = []
+    }
+    return (
+        <section className="whats-news-area pt-50 pb-20">
+            <div className="container">
+                <div className="row">
+                    <PostLeft list={listHistory}/>
+                    <PostRight/>
                 </div>
-            </section>
-        </div> : <div></div>)
-}
-export async function loadCategory({params}) {
-    const cate = cateData.find(item => item.cate === params.cate);
-    return (typeof cate === 'undefined' ? null : cate);
+            </div>
+        </section>
+    )
 }
