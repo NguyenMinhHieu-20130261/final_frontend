@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from "react";
-import {cateData} from "../category-data/cateData";
-import {useLoaderData} from "react-router";
+import {RssPage} from "../RSS/rss";
 import {Link} from "react-router-dom";
-import {RssPage} from "../RSS/rss.js";
-import icon from "./layout/icon/newspaper.png"
+import {useLoaderData} from "react-router";
+import {cateData} from "../category-data/cateData";
 
 const PostLeft = (params) => {
     const listPost = RssPage(params.cate)
@@ -72,7 +71,7 @@ const ListCategory = () => {
                     <nav>
                         <div className="nav nav-tabs" id="nav-tab" role="tablist">
                             <Link to={"/thoi-su"} className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
-                               role="tab" aria-controls="nav-profile" aria-selected="false">Trong Nước</Link>
+                                  role="tab" aria-controls="nav-profile" aria-selected="false">Trong Nước</Link>
                             <Link to={"/thoi-su-quoc-te"} className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
                                   role="tab" aria-controls="nav-profile" aria-selected="false">Quốc Tế</Link>
                             <Link to={"/kinh-te"} className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
@@ -97,7 +96,7 @@ const ListPost = (params) => {
                         <div className="whats-news-caption">
                             <div className="row">
                                 {params.list.map(item => <PostItem cate={params.cate} title={item.title} desc={item.desc}
-                                    link={item.link} img={item.img} name={params.name}/>)}
+                                                                   link={item.link} img={item.img} name={params.name}/>)}
                             </div>
                         </div>
                     </div>
@@ -124,7 +123,7 @@ const PostItem = (params) => {
                 <div className="what-cap">
                     <span className="color1">{params.name}</span>
                     <h4><Link to={`/${params.link.substring(20, params.link.indexOf(".htm"))}`}
-                    onClick={() => {historyPost({cate:params.cate, link:params.link, img:params.img})}}>{params.title}</Link></h4>
+                              onClick={() => {historyPost({cate:params.cate, link:params.link, img:params.img})}}>{params.title}</Link></h4>
                 </div>
             </div>
         </div>
@@ -182,19 +181,20 @@ const PostRight = () => {
         </div>
     )
 }
-export const Category = () => {
-    const cate = useLoaderData();
-    return (cate ?
+export const History = () => {
+    const listHistory = localStorage.getItem("history")
+    console.log(listHistory)
+    return (listHistory ?
         <div>
             <section className="whats-news-area pt-50 pb-20">
                 <div className="container">
                     <div className="row">
-                        <PostLeft cate={cate.cate} name={cate.name}/>
+                        <PostLeft />
                         <PostRight/>
                     </div>
                 </div>
             </section>
-    </div> : <div></div>)
+        </div> : <div></div>)
 }
 export async function loadCategory({params}) {
     const cate = cateData.find(item => item.cate === params.cate);
