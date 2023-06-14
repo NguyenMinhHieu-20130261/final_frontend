@@ -15,37 +15,71 @@ function NewContent(props) {
             contentRef.current.appendChild(datacontent)
         }
     }, [datacontent]);
-    return (<div className="p-b-70">
-        <Link to={`/${props.cate}`} className="f1-s-10 cl2 hov-cl10 trans-03 text-uppercase">
+    return (<div className="p-b-70" style={{marginRight:"56px"}}>
+        <Link to={`/${props.cate}`} className="text-uppercase" style={{fontSize:"13px"}}>
             {cateData.find(item => item.cate === props.cate).name}
         </Link>
-        <h3 className="f1-l-3 cl2 p-b-20 p-t-33 respon2">
+        <h3 className="respon2" style={{marginTop:"20px", marginBottom:"20px"}}>
             {content.title}
         </h3>
-        <div className="flex-wr-s-s p-b-17" style={{alignItems: "center"}}>
+        <div style={{alignItems: "center"}}>
 								<span className="f1-s-3 cl8 m-r-15">
 									<span>
 										{content.date}
 									</span>
 								</span>
         </div>
-        <h5 className={"sapo p-b-15"}>{content.sapo}</h5>
+        <h5 className={"sapo"} style={{marginTop:"10px"}}>{content.sapo}</h5>
 
         <div className={"main-content"} ref={contentRef}/>
 
 
-        <div className="social-share pt-30">
-            <div className="section-tittle">
-                <h3 className="mr-20">Share:</h3>
-                <ul>
-                    <li><a href="#"><img src="assets/img/news/icon-ins.png" alt=""/></a></li>
-                    <li><a href="#"><img src="assets/img/news/icon-fb.png" alt=""/></a></li>
-                    <li><a href="#"><img src="assets/img/news/icon-tw.png" alt=""/></a></li>
-                    <li><a href="#"><img src="assets/img/news/icon-yo.png" alt=""/></a></li>
-                </ul>
+        <div className="flex-s-s" style={{display:"flex"}}>
+            <span style={{paddingTop: "12px", marginRight: "20px"}}>
+                Share:
+            </span>
+            <div style={{cursor:"pointer"}}>
+                <FacebookShare/>
+                <TwitterShare/>
             </div>
         </div>
     </div>)
+}
+
+function FacebookShare() {
+    const handleFbShare = () => {
+        // Lấy url của tin tức muốn chia sẻ
+        const urlToShare = "https://nld.com.vn" + sessionStorage.getItem("link");
+        const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(urlToShare)}`;
+        window.open(facebookShareUrl, '_blank');
+    };
+
+    return (
+        <a onClick={handleFbShare}
+           className="f1-s-13 cl0 bg-facebook hov-btn1"
+           style={{color: "white", marginRight:"30px"}}>
+            <i className="fab fa-facebook-f m-r-7" style={{margin:"10px"}}></i>
+            Facebook
+        </a>
+    );
+}
+
+function TwitterShare() {
+    const ShareTwitterButton = () => {
+        // Lấy URL của tin tức muốn chia sẻ
+        const urlToShare = "https://nld.com.vn" + sessionStorage.getItem("link");
+        const twitterShareUrl = `https://twitter.com/share?url=${encodeURIComponent(urlToShare)}`;
+        window.open(twitterShareUrl, '_blank');
+    };
+
+    return (
+        <a onClick={ShareTwitterButton}
+           className="f1-s-13 cl0 bg-twitter hov-btn1"
+           style={{color: "white"}}>
+            <i className="fab fa-twitter m-r-7" style={{margin:"10px"}}></i>
+            Twitter
+        </a>
+    );
 }
 
 
