@@ -239,7 +239,7 @@ a:focus, a:hover, .portfolio-cat a:hover, .footer -menu li a:hover {
 }
 
 a, button {
-    color: #fff;
+    color: #070707;
     outline: medium none
 }
 
@@ -5265,7 +5265,7 @@ hr {
 }
 
 .breadcam_bg_2 {
-    /*background-image: url(../img/banner/bradcam3.png)*/
+    /*background-image: url(public/assets/img/banner/bradcam3.png)*/
 }
 
 .bradcam_area {
@@ -6620,4 +6620,21 @@ b, sup, sub, u, del {
 
 .switch-wrap {
     margin-bottom: 10px
+}
+
+.hov-btn1:hover {
+    background-color: #17b978;
+    border-color: #17b978;
+    color: #fff;
+}
+.f1-s-13 {
+    font-size: 26px;
+    line-height: 1.7;
+}
+.cl0 {
+    color: #fff;
+}
+
+.bg-facebook {
+    background-color: #3b5998;
 }

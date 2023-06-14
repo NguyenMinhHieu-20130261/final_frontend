@@ -1,3 +1,4 @@
+import React from "react";
 import {RssDetails} from "../RSS/rss";
 import {Link, useLoaderData} from "react-router-dom";
 import {useMemo} from "react";
@@ -11,10 +12,10 @@ export const Breadcrumb = (props) => {
             <div className="col-lg-12">
                 <div className="trending-tittle">
                     <div className="trending-animated" style={{display: "flex"}}>
-                        <Link to={'/home'} className="item home">Trang chủ</Link>
+                        <Link to={'/home'} className="item home" style={{color: "black"}}>Trang chủ/ </Link>
                         <Link to={`/${props.cate}`}
-                              className="item cate"> / {cateData.find(item => item.cate === props.cate).name}</Link>
-                        <span className="item title"> / {props.title}</span>
+                              className="item cate" style={{color: "black"}}> {cateData.find(item => item.cate === props.cate).name}</Link>
+                        <span className="item title" > / {props.title}</span>
                     </div>
 
                 </div>
@@ -23,7 +24,7 @@ export const Breadcrumb = (props) => {
     )
 }
 export const MainContent = (props) => {
-    return (<div className="col-md-10 col-lg-8">
+    return (<div className="col-lg-8">
             <NewContent post={props.post} cate={props.cate}/>
     </div>)
 }
@@ -137,7 +138,7 @@ export const FollowSocial = () => {
             <div className="single-box">
                 <div className="follow-us d-flex align-items-center">
                     <div className="follow-social">
-                        <a href="#"><img src="assets/img/news/icon-fb.png" alt=""/></a>
+                        <a href="#"><img src="src/components/assets/img/news/icon-fb.png" alt=""/></a>
                     </div>
                     <div className="follow-count">
                         <span>8,045</span>
@@ -146,7 +147,7 @@ export const FollowSocial = () => {
                 </div>
                 <div className="follow-us d-flex align-items-center">
                     <div className="follow-social">
-                        <a href="#"><img src="assets/img/news/icon-tw.png" alt=""/></a>
+                        <a href="#"><img src="src/components/assets/img/news/icon-tw.png" alt=""/></a>
                     </div>
                     <div className="follow-count">
                         <span>8,045</span>
@@ -155,7 +156,7 @@ export const FollowSocial = () => {
                 </div>
                 <div className="follow-us d-flex align-items-center">
                     <div className="follow-social">
-                        <a href="#"><img src="assets/img/news/icon-ins.png" alt=""/></a>
+                        <a href="#"><img src="src/components/assets/img/news/icon-ins.png" alt=""/></a>
                     </div>
                     <div className="follow-count">
                         <span>8,045</span>
@@ -164,7 +165,7 @@ export const FollowSocial = () => {
                 </div>
                 <div className="follow-us d-flex align-items-center">
                     <div className="follow-social">
-                        <a href="#"><img src="assets/img/news/icon-yo.png" alt=""/></a>
+                        <a href="#"><img src="src/components/assets/img/news/icon-yo.png" alt=""/></a>
                     </div>
                     <div className="follow-count">
                         <span>8,045</span>

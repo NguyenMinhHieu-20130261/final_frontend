@@ -34,18 +34,32 @@ function NewContent(props) {
         <div className={"main-content"} ref={contentRef}/>
 
 
-        <div className="social-share pt-30">
-            <div className="section-tittle">
-                <h3 className="mr-20">Share:</h3>
-                <ul>
-                    <li><a href="#"><img src="assets/img/news/icon-ins.png" alt=""/></a></li>
-                    <li><a href="#"><img src="assets/img/news/icon-fb.png" alt=""/></a></li>
-                    <li><a href="#"><img src="assets/img/news/icon-tw.png" alt=""/></a></li>
-                    <li><a href="#"><img src="assets/img/news/icon-yo.png" alt=""/></a></li>
-                </ul>
+        <div className="flex-s-s" style={{display:"flex"}}>
+            <span className="f1-s-12 cl5 p-t-1 m-r-15" style={{paddingTop: "12px", marginRight: "20px"}}>
+                Share:
+            </span>
+            <div className="flex-wr-s-s size-w-0" style={{cursor:"pointer"}}>
+                <ShareFbButton/>
             </div>
         </div>
     </div>)
+}
+
+function ShareFbButton() {
+    const handleFbShare = () => {
+        const urlToShare = "https://nld.com.vn" + sessionStorage.getItem("link"); // URL của tin tức muốn chia sẻ
+        const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(urlToShare)}`;
+        window.open(facebookShareUrl, '_blank');
+    };
+
+    return (
+        <a onClick={handleFbShare}
+           className="dis-block f1-s-13 cl0 bg-facebook borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03"
+           style={{color: "white"}}>
+            <i className="fab fa-facebook-f m-r-7" style={{margin:"10px"}}></i>
+            Facebook
+        </a>
+    );
 }
 
 
