@@ -9,24 +9,23 @@ export const RssPage = (page) => {
         axios.get(url)
             .then(res => {
                 const xml = res.data;
-                // parser.
                 parseString(xml,(err, feed) => {
                     if(err === true){
                         console.log(err);
                     } else {
                         const content = feed.rss.channel[0].item.map(item =>{
-                            const description = item.description[0];
-                            const imageUrlRegex = /<img.*?src="(.*?)"/;
-                            const imageUrlMatch = description.match(imageUrlRegex);
-                            const img = imageUrlMatch ? imageUrlMatch[1] : null;
-                            const cleanedDescription = description.replace(/<\/?(a|img)[^>]*>/g, '').replace(/&#\d+;/g, '');
+                            const desc = item.description[0];
+                            const cleanedDesc = desc.replace(/<\/?(a|img)[^>]*>/g, '');
+                            const imgUrlRegex = /<img.*?src="(.*?)"/;
+                            const imgUrlMatch = desc.match(imgUrlRegex);
+                            const imgLink = imgUrlMatch ? imgUrlMatch[1] : null;
                             return{
                                 title : item.title[0],
                                 desc : cleanedDescription,
                                 pubDate : item.pubDate[0],
                                 guid : item.guid[0],
                                 link : item.link[0],
-                                img: img
+                                img : imgLink
                             }
                         });
                         setRssItems(content);
