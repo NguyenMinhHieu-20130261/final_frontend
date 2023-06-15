@@ -16,7 +16,7 @@ function NewContent(props) {
             }
             contentRef.current.appendChild(datacontent)
             const paragraphs = contentElement.querySelectorAll('p');
-            let speakData = content.sapo + ", " + Array.from(paragraphs).map((p) => p.textContent).join(", ");
+            let speakData = content.title + ", " + content.sapo + ", " + Array.from(paragraphs).map((p) => p.textContent).join(", ");
             setSpeak(speakData)
         }
     }, [datacontent]);
@@ -24,6 +24,7 @@ function NewContent(props) {
         <Link to={`/${props.cate}`} className="text-uppercase" style={{fontSize:"13px"}}>
             {cateData.find(item => item.cate === props.cate).name}
         </Link>
+        <Speech text={speakContent}/>
         <h3 className="respon2" style={{marginTop:"20px", marginBottom:"20px"}}>
             {content.title}
         </h3>
@@ -33,7 +34,6 @@ function NewContent(props) {
 										{content.date}
 									</span>
 								</span>
-            <Speech text={speakContent}/>
         </div>
         <h5 className={"sapo"} style={{marginTop:"10px"}}>{content.sapo}</h5>
 
