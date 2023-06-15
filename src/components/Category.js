@@ -17,26 +17,29 @@ const PostLeft = (params) => {
         if (listPost) {
             let start = (currentPage - 1) * postNumber;
             let end = start + postNumber;
-            let post = listPost.slice(start,end)
+            let post = listPost.slice(start, end)
             setListPostOnePage(post);
-            console.log(listPost.slice(start,end))
+            console.log(listPost.slice(start, end))
             console.log(listPostOnePage)
         }
-    },[listPost,currentPage])
+    }, [listPost, currentPage])
+
     function nextPage(page) {
         setCurrentPage(page)
     }
+
     for (let i = 0; i < pageTotal; i++) {
-        let page = i+1
+        let page = i + 1
         numberPage.push(<li className="page-item active">
-            <a className="page-link" onClick={() => {nextPage(page)}}>{page}</a>
+            <a className="page-link" onClick={() => {
+                nextPage(page)
+            }}>{page}</a>
         </li>)
     }
-    console.log(listPostOnePage)
     return (
         <div className="col-lg-8">
             <ListCategory name={params.name}/>
-            {listPostOnePage? <ListPost cate={params.cate} name={params.name} list={listPostOnePage} key={listPostOnePage}/> : <div></div>}
+            {listPostOnePage ? <ListPost list={listPostOnePage} key={listPostOnePage}/> : <div></div>}
             <div className="pagination-area pb-45 text-center">
                 <div className="container">
                     <div className="row">
@@ -60,7 +63,7 @@ const PostLeft = (params) => {
     )
 }
 const ListCategory = (params) => {
-    return(
+    return (
         <div className="row d-flex justify-content-between">
             <div className="col-lg-3 col-md-3">
                 <div className="section-tittle mb-30">
@@ -75,11 +78,13 @@ const ListPost = (params) => {
         <div className="row">
             <div className="col-12">
                 <div className="tab-content" id="nav-tabContent">
-                    <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <div className="tab-pane fade show active" id="nav-home" role="tabpanel"
+                         aria-labelledby="nav-home-tab">
                         <div className="whats-news-caption">
                             <div className="row">
-                                {params.list.map(item => <PostItem cate={params.cate} title={item.title} desc={item.desc}
-                                    link={item.link} img={item.img} name={params.name} pubDate={item.pubDate}/>)}
+                                {params.list.map(item => <PostItem title={item.title} desc={item.desc}
+                                                                   link={item.link} img={item.img}
+                                                                   pubDate={item.pubDate}/>)}
                             </div>
                         </div>
                     </div>
@@ -94,18 +99,47 @@ const PostItem = (params) => {
         if (!list) {
             list = []
         }
-        if (!list.find(obj => obj.cate === item.cate && obj.img === item.img
-                         && obj.link === item.link && obj.title === item.title)) {
+        if (!list.find(obj => obj.title === item.title && obj.desc === item.desc
+            && obj.pubDate === item.pubDate && obj.img === item.img
+            && obj.link === item.link)) {
             list.push(item)
-        }
-        if (list.find(obj => obj.cate === item.cate && obj.img === item.img
-            && obj.link === item.link && obj.title === item.title)) {
-            const filteredList = list.filter(obj => !(obj.cate === item.cate && obj.img === item.img && obj.link === item.link && obj.title === item.title));
+        } else {
+            const filteredList = list.filter(obj => !(obj.title === item.title && obj.desc === item.desc
+                && obj.pubDate === item.pubDate && obj.img === item.img
+                && obj.link === item.link));
+            filteredList.reverse();
             filteredList.push(item);
             list = filteredList;
         }
         list.reverse()
         localStorage.setItem("history", JSON.stringify(list))
+    }
+
+    let listSaved = JSON.parse(localStorage.getItem("saved-post"))
+    if (!listSaved) {
+        listSaved = []
+    }
+    const checkSavedPost = (item) => {
+        return listSaved.find(obj => obj.title === item.title && obj.desc === item.desc
+            && obj.pubDate === item.pubDate && obj.img === item.img
+            && obj.link === item.link)
+    }
+
+    function savedPost(item) {
+        if (!listSaved.find(obj => obj.title === item.title && obj.desc === item.desc
+            && obj.pubDate === item.pubDate && obj.img === item.img
+            && obj.link === item.link)) {
+            listSaved.push(item)
+        } else {
+            const filteredList = listSaved.filter(obj => !(obj.title === item.title && obj.desc === item.desc
+                && obj.pubDate === item.pubDate && obj.img === item.img
+                && obj.link === item.link));
+            filteredList.reverse();
+            listSaved = filteredList
+        }
+        listSaved.reverse()
+        localStorage.setItem("saved-post", JSON.stringify(listSaved))
+        window.location.reload()
     }
     return (
         <div className="col-lg-6 col-md-6">
@@ -115,9 +149,25 @@ const PostItem = (params) => {
                 </div>
                 <div className="what-cap">
                     <span className="color1">{params.pubDate}</span>
-                    <button className="ml-10 border-0 bg-white" type="submit"><i className="fas fa-bookmark"></i></button>
+                    <button className={`ml-10 border-0 bg-white 
+                    ${checkSavedPost({
+                        title: params.title, desc: params.desc,
+                        pubDate: params.pubDate, link: params.link, img: params.img
+                    }) ? `text-warning` : ``}`}
+                            type="reset"
+                            onClick={() => {
+                                savedPost({
+                                    title: params.title, desc: params.desc,
+                                    pubDate: params.pubDate, link: params.link, img: params.img
+                                })
+                            }}><i className="fas fa-bookmark"></i></button>
                     <h4><Link to={`/${params.link.substring(20, params.link.indexOf(".htm"))}`}
-                    onClick={() => {historyPost({cate:params.cate, link:params.link, img:params.img, title:params.title, name:params.name})}}>{params.title}</Link></h4>
+                              onClick={() => {
+                                  historyPost({
+                                      title: params.title, desc: params.desc,
+                                      pubDate: params.pubDate, link: params.link, img: params.img
+                                  })
+                              }}>{params.title}</Link></h4>
                 </div>
             </div>
         </div>
@@ -187,8 +237,9 @@ export const Category = () => {
                     </div>
                 </div>
             </section>
-    </div> : <div></div>)
+        </div> : <div></div>)
 }
+
 export async function loadCategory({params}) {
     const cate = cateData.find(item => item.cate === params.cate);
     return (typeof cate === 'undefined' ? null : cate);

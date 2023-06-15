@@ -67,11 +67,12 @@ const ListPost = (params) => {
     let item = []
     if (params.list) {
         for (let i = 0; i < params.list.length; i++) {
-            item.push(<PostItem cate={params.list[i].cate}
-                                title={params.list[i].title}
+            item.push(<PostItem title={params.list[i].title}
+                                desc={params.list[i].desc}
+                                pubDate={params.list[i].pubDate}
                                 link={params.list[i].link}
                                 img={params.list[i].img}
-                                name={params.list[i].name}/>)
+            />)
         }
     }
     return (
@@ -97,20 +98,76 @@ const PostItem = (params) => {
         if (!list) {
             list = []
         }
-        list.push(item)
+        if (!list.find(obj => obj.title === item.title && obj.desc === item.desc
+            && obj.pubDate === item.pubDate && obj.img === item.img
+            && obj.link === item.link)) {
+            list.push(item)
+        } else {
+            const filteredList = list.filter(obj => !(obj.title === item.title && obj.desc === item.desc
+                && obj.pubDate === item.pubDate && obj.img === item.img
+                && obj.link === item.link));
+            filteredList.reverse();
+            filteredList.push(item);
+            list = filteredList;
+        }
+        list.reverse()
         localStorage.setItem("history", JSON.stringify(list))
+    }
+
+    let listSaved = JSON.parse(localStorage.getItem("saved-post"))
+    if (!listSaved) {
+        listSaved = []
+    }
+    const checkSavedPost = (item) => {
+        return listSaved.find(obj => obj.title === item.title && obj.desc === item.desc
+            && obj.pubDate === item.pubDate && obj.img === item.img
+            && obj.link === item.link)
+    }
+
+    function savedPost(item) {
+        if (!listSaved.find(obj => obj.title === item.title && obj.desc === item.desc
+            && obj.pubDate === item.pubDate && obj.img === item.img
+            && obj.link === item.link)) {
+            listSaved.push(item)
+        } else {
+            const filteredList = listSaved.filter(obj => !(obj.title === item.title && obj.desc === item.desc
+                && obj.pubDate === item.pubDate && obj.img === item.img
+                && obj.link === item.link));
+            filteredList.reverse();
+            listSaved = filteredList
+        }
+        listSaved.reverse()
+        localStorage.setItem("saved-post", JSON.stringify(listSaved))
+        window.location.reload()
     }
 
     return (
         <div className="col-lg-6 col-md-6">
-            <div className="single-what-news mb-100">
+            <div className="single-what-news mb-50">
                 <div className="what-img">
                     <img src={params.img} alt=""/>
                 </div>
                 <div className="what-cap">
-                    <span className="color1">{params.name}</span>
-                    <h4><Link to={`/${params.link.substring(20, params.link.indexOf(".htm"))}`}>{params.title}</Link>
-                    </h4>
+                    <span className="color1">{params.pubDate}</span>
+                    <button className={`ml-10 border-0 bg-white 
+                    ${checkSavedPost({
+                        title: params.title, desc: params.desc,
+                        pubDate: params.pubDate, link: params.link, img: params.img
+                    }) ? `text-warning` : ``}`}
+                            type="reset"
+                            onClick={() => {
+                                savedPost({
+                                    title: params.title, desc: params.desc,
+                                    pubDate: params.pubDate, link: params.link, img: params.img
+                                })
+                            }}><i className="fas fa-bookmark"></i></button>
+                    <h4><Link to={`/${params.link.substring(20, params.link.indexOf(".htm"))}`}
+                              onClick={() => {
+                                  historyPost({
+                                      title: params.title, desc: params.desc,
+                                      pubDate: params.pubDate, link: params.link, img: params.img
+                                  })
+                              }}>{params.title}</Link></h4>
                 </div>
             </div>
         </div>
