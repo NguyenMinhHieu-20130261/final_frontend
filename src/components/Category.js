@@ -112,7 +112,10 @@ const PostItem = (params) => {
         if (!list) {
             list = []
         }
-        list.push(item)
+        if (!list.find(obj => obj.cate === item.cate && obj.img === item.img
+                         && obj.link === item.link && obj.title === item.title)) {
+            list.push(item)
+        }
         localStorage.setItem("history", JSON.stringify(list))
     }
     return (
@@ -124,7 +127,7 @@ const PostItem = (params) => {
                 <div className="what-cap">
                     <span className="color1">{params.name}</span>
                     <h4><Link to={`/${params.link.substring(20, params.link.indexOf(".htm"))}`}
-                    onClick={() => {historyPost({cate:params.cate, link:params.link, img:params.img})}}>{params.title}</Link></h4>
+                    onClick={() => {historyPost({cate:params.cate, link:params.link, img:params.img, title:params.title, name:params.name})}}>{params.title}</Link></h4>
                 </div>
             </div>
         </div>
