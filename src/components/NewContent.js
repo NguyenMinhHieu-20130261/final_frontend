@@ -1,11 +1,13 @@
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {Link} from "react-router-dom";
 import {cateData} from "../category-data/cateData";
+import Speech from "./Speech/Speech";
 
 function NewContent(props) {
     const content = props.post;
     const contentRef = useRef(null);
     const datacontent = content.contents
+    const [speakContent, setSpeak] = useState("");
     useEffect(() => {
         if (contentRef.current && datacontent instanceof Node) {
             const contentElement = contentRef.current;
@@ -13,6 +15,9 @@ function NewContent(props) {
                 contentElement.removeChild(contentElement.firstChild);
             }
             contentRef.current.appendChild(datacontent)
+            const paragraphs = contentElement.querySelectorAll('p');
+            let speakData = content.sapo + ", " + Array.from(paragraphs).map((p) => p.textContent).join(", ");
+            setSpeak(speakData)
         }
     }, [datacontent]);
     return (<div className="p-b-70" style={{marginRight:"56px"}}>
@@ -28,6 +33,7 @@ function NewContent(props) {
 										{content.date}
 									</span>
 								</span>
+            <Speech text={speakContent}/>
         </div>
         <h5 className={"sapo"} style={{marginTop:"10px"}}>{content.sapo}</h5>
 
@@ -36,7 +42,7 @@ function NewContent(props) {
 
         <div className="flex-s-s" style={{display:"flex"}}>
             <span style={{paddingTop: "12px", marginRight: "20px"}}>
-                Share:
+                Chia sẻ:
             </span>
             <div style={{cursor:"pointer"}}>
                 <FacebookShare/>

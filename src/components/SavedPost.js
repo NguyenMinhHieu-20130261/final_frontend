@@ -1,12 +1,8 @@
 import React, {useEffect, useState} from "react";
-import {cateData} from "../category-data/cateData";
-import {useLoaderData} from "react-router";
 import {Link} from "react-router-dom";
-import {RssPage} from "../RSS/rss.js";
-import icon from "./layout/icon/newspaper.png"
 
 const PostLeft = (params) => {
-    const listPost = RssPage(params.cate)
+    const listPost = params.list
     const [currentPage, setCurrentPage] = useState(1)
     const [listPostOnePage, setListPostOnePage] = useState(null)
     let numberPage = []
@@ -19,8 +15,6 @@ const PostLeft = (params) => {
             let end = start + postNumber;
             let post = listPost.slice(start, end)
             setListPostOnePage(post);
-            console.log(listPost.slice(start, end))
-            console.log(listPostOnePage)
         }
     }, [listPost, currentPage])
 
@@ -38,8 +32,8 @@ const PostLeft = (params) => {
     }
     return (
         <div className="col-lg-8">
-            <ListCategory name={params.name}/>
-            {listPostOnePage ? <ListPost list={listPostOnePage} key={listPostOnePage}/> : <div></div>}
+            <ListCategory/>
+            {listPostOnePage ? <ListPost list={listPostOnePage}/> : <div></div>}
             <div className="pagination-area pb-45 text-center">
                 <div className="container">
                     <div className="row">
@@ -47,11 +41,7 @@ const PostLeft = (params) => {
                             <div className="single-wrap d-flex justify-content-center">
                                 <nav aria-label="Page navigation example">
                                     <ul className="pagination justify-content-start">
-                                        {/*<li className="page-item"><a className="page-link" href="#"><span*/}
-                                        {/*    className="flaticon-arrow roted"></span></a></li>*/}
                                         {numberPage}
-                                        {/*<li className="page-item"><a className="page-link" href="#"><span*/}
-                                        {/*    className="flaticon-arrow right-arrow"></span></a></li>*/}
                                     </ul>
                                 </nav>
                             </div>
@@ -62,18 +52,29 @@ const PostLeft = (params) => {
         </div>
     )
 }
-const ListCategory = (params) => {
+const ListCategory = () => {
     return (
         <div className="row d-flex justify-content-between">
             <div className="col-lg-3 col-md-3">
                 <div className="section-tittle mb-30">
-                    <h3>{params.name}</h3>
+                    <h3>Bài Viết Đã Lưu</h3>
                 </div>
             </div>
         </div>
     )
 }
 const ListPost = (params) => {
+    let item = []
+    if (params.list) {
+        for (let i = 0; i < params.list.length; i++) {
+            item.push(<PostItem title={params.list[i].title}
+                                desc={params.list[i].desc}
+                                pubDate={params.list[i].pubDate}
+                                link={params.list[i].link}
+                                img={params.list[i].img}
+                                />)
+        }
+    }
     return (
         <div className="row">
             <div className="col-12">
@@ -82,9 +83,7 @@ const ListPost = (params) => {
                          aria-labelledby="nav-home-tab">
                         <div className="whats-news-caption">
                             <div className="row">
-                                {params.list.map(item => <PostItem title={item.title} desc={item.desc}
-                                                                   link={item.link} img={item.img}
-                                                                   pubDate={item.pubDate}/>)}
+                                {item ? item : <div></div>}
                             </div>
                         </div>
                     </div>
@@ -141,6 +140,7 @@ const PostItem = (params) => {
         localStorage.setItem("saved-post", JSON.stringify(listSaved))
         window.location.reload()
     }
+
     return (
         <div className="col-lg-6 col-md-6">
             <div className="single-what-news mb-50">
@@ -225,22 +225,19 @@ const PostRight = () => {
         </div>
     )
 }
-export const Category = () => {
-    const cate = useLoaderData();
-    return (cate ?
-        <div>
-            <section className="whats-news-area pt-50 pb-20">
-                <div className="container">
-                    <div className="row">
-                        <PostLeft cate={cate.cate} name={cate.name}/>
-                        <PostRight/>
-                    </div>
+export const SavedPost = () => {
+    let listSavedPost = JSON.parse(localStorage.getItem("saved-post"))
+    if (listSavedPost === null) {
+        listSavedPost = []
+    }
+    return (
+        <section className="whats-news-area pt-50 pb-20">
+            <div className="container">
+                <div className="row">
+                    <PostLeft list={listSavedPost}/>
+                    <PostRight/>
                 </div>
-            </section>
-        </div> : <div></div>)
-}
-
-export async function loadCategory({params}) {
-    const cate = cateData.find(item => item.cate === params.cate);
-    return (typeof cate === 'undefined' ? null : cate);
+            </div>
+        </section>
+    )
 }

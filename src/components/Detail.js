@@ -1,9 +1,10 @@
 import React from "react";
-import {RssDetails} from "../RSS/rss";
+import {RssDetails, RssPage} from "../RSS/rss";
 import {Link, useLoaderData} from "react-router-dom";
 import {useMemo} from "react";
 import {cateData} from "../category-data/cateData";
 import NewContent from "./NewContent";
+import {Comments, FacebookProvider} from "react-facebook";
 
 
 export const Breadcrumb = (props) => {
@@ -12,10 +13,12 @@ export const Breadcrumb = (props) => {
             <div className="col-lg-12">
                 <div className="trending-tittle">
                     <div className="trending-animated" style={{display: "flex"}}>
-                        <Link to={'/home'} className="item home" style={{color: "black"}}>Trang chủ/ </Link>
+                        <Link to={'/home'} className="item home" style={{color: "black"}}>Trang chủ</Link>
+                        <span style={{margin: "0 10px 0 10px"}}> > </span>
                         <Link to={`/${props.cate}`}
                               className="item cate" style={{color: "black"}}> {cateData.find(item => item.cate === props.cate).name}</Link>
-                        <span className="item title" > / {props.title}</span>
+                        <span style={{margin: "0 10px 0 10px"}}> > </span>
+                        <span className="item title" > {props.title}</span>
                     </div>
 
                 </div>
@@ -26,7 +29,16 @@ export const Breadcrumb = (props) => {
 export const MainContent = (props) => {
     return (<div className="col-lg-8">
             <NewContent post={props.post} cate={props.cate}/>
+            <FacebookComment link={props.link}></FacebookComment>
     </div>)
+}
+export const FacebookComment = (props) => {
+    return (
+        <FacebookProvider appId="810763943962254">
+            <Comments
+                href={`http://127.0.0.1:3000/` + props.link.substring(5, props.link.indexOf('.htm'))}/>
+        </FacebookProvider>
+    );
 }
 
 export const PopularPosts = () => {
@@ -198,7 +210,7 @@ export const Sidebar = () => {
 export const Content = (props) => {
     return (
             <div className="row">
-                <MainContent post={props.post} cate={props.cate}></MainContent>
+                <MainContent link={props.link} post={props.post} cate={props.cate}></MainContent>
                 <Sidebar></Sidebar>
             </div>
     )
@@ -208,13 +220,14 @@ export function Detail() {
     const data = useLoaderData();
     const memoizedUrl = useMemo(() => data.link, [data]);
     const post = RssDetails(memoizedUrl);
+    const item = RssPage(data.cate).find(item => item.link.indexOf(data.link.substring(5)) !== -1);
     return (
         <div className="about-area">
             <div className="container">
                 <div key={data.link}>
                     {post ? (
-                        <div><Breadcrumb key={data} cate={data.cate} title={post.title}/>
-                            <Content key={post} post={post} cate={data.cate}/></div>
+                        <div><Breadcrumb item={item} key={data} cate={data.cate} title={post.title}/>
+                            <Content link={data.link} key={post} post={post} cate={data.cate}/></div>
                     ) : (
                         <h4 style={{textAlign: "center", marginBottom: "50px", marginTop: "50px"}}> Đang hiển thị chi
                             tiết... </h4>)}
