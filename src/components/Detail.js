@@ -37,7 +37,7 @@ export const FacebookComment = (props) => {
     return (
         <FacebookProvider appId="810763943962254">
             <Comments
-                href={`http://localhost:3000/` + props.link.substring(5, props.link.indexOf('.htm'))}/>
+                href={`http://127.0.0.1:3000/` + props.link.substring(5, props.link.indexOf('.htm'))}/>
         </FacebookProvider>
     );
 }
