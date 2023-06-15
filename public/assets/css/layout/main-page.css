@@ -24,3 +24,6 @@
 .tag-container :hover .tag-item{
     color: whitesmoke;
 }
+.result-search a{
+    padding: 0 !important;
+}

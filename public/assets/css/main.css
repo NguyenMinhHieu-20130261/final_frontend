@@ -3215,10 +3215,6 @@ hr {
 }
 
 /* line 92, ../../SAIFUL/Running_project/248. Magazine & News/assets/scss/_headerMenu.scss */
-.main-header {
-  position: relative;
-  z-index: 3;
-}
 
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
   /* line 95, ../../SAIFUL/Running_project/248. Magazine & News/assets/scss/_headerMenu.scss */

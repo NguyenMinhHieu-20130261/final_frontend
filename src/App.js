@@ -1,9 +1,7 @@
 import Header from "./components/layout/Header";
 import {Footer} from "./components/layout/Footer";
 import {Outlet} from "react-router";
-// import './components/assets/fonts/fontawesome-5.0.8/css/fontawesome-all.min.css';
 import './components/assets/css/bootstrap.min.css';
-// import './components/assets/css/owl.carousel.min.css';
 import './components/assets/css/ticker-style.css';
 import './components/assets/css/flaticon.css';
 import './components/assets/css/slick.css';

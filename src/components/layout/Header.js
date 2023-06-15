@@ -1,53 +1,12 @@
-import React, {useEffect, useState} from 'react';
 import {cateData} from "../../category-data/cateData";
 import {Link} from "react-router-dom";
-import {RssPage} from "../../RSS/rss";
+import {SearchingBar, SearchBar} from "./SearchBar";
 const OtherCates = (data) => {
     return (
         <li><Link to={`${data.cate}`}>{data.name}</Link></li>
     )
 }
-const SearchBar = (data) => {
-    const [searchText, setSearchText] = useState("");
-    const [result , setResult] =useState(null)
-
-    const list = RssPage(data.cate);
-    useEffect(() => {
-
-    }, [data]);
-    const toSearchPage = () => {
-
-    }
-    return(
-            <div className="col-xl-2 col-lg-2 col-md-4">
-                <div className="header-right-btn ">
-                    <i className="fas fa-search magnify"
-                    onClick={toSearchPage()}
-                    ></i>
-                    <form>
-                        <input
-                            onChange={(e) => setSearchText(e.target.value)}
-                            className="search-bar" type="text" name="search" placeholder="Tìm kiếm"/>
-                        <ul id="search-result">
-                            <li>
-                                <div> test</div>
-                                {result.map((result) => (
-                                    <li><Link to={result.link}>
-                                        <div className="search-result">
-                                            <p>{result.title}</p>
-                                            <p>{result.pubDate}</p>
-                                        </div>
-                                    </Link></li>
-                                ))}
-                            </li>
-                        </ul>
-
-                    </form>
-                </div>
-            </div>
-        )
-    // }
-}
+let cate = ""
 const Header = () => {
     return (
         <header>
@@ -77,13 +36,11 @@ const Header = () => {
                         <div className="container">
                             <div className="row align-items-center">
                                 <div className="col-xl-10 col-lg-10 col-md-12 header-flex">
-
                                     <div className="sticky-logo">
                                         <Link to={"/home"}>
 
                                         </Link>
                                     </div>
-
                                     <div className="main-menu d-none d-md-block">
                                         <nav>
                                             <ul id="navigation">
@@ -108,7 +65,7 @@ const Header = () => {
                                         </nav>
                                     </div>
                                 </div>
-                                <SearchBar></SearchBar>
+                                <SearchBar key={cate.cate} cate={cate.cate}/>
                                 <div className="col-12">
                                     <div className="mobile_menu d-block d-md-none"></div>
                                 </div>

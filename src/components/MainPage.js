@@ -105,7 +105,7 @@ const LatestPost = (data) => {
   )
 }
 const latest = "tin-moi-nhat.rss";
-const Latest = () => {
+const Latest = (data) => {
     const [itemContent, setItem] = useState(latest)
     const list = RssPage(itemContent.cate)
     if (list.length < 1) {
@@ -252,7 +252,7 @@ const CatePost = (data) => {
   )
 }
 export const Home = () => {
-  return(
+    return(
       <div id="main-page"
       style={{marginTop:"25px"}}>
           <Trending/>
