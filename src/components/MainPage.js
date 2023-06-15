@@ -95,8 +95,8 @@ const LatestPost = (data) => {
                   <div className="what-img">
                       <img src={data.img}></img>
                   </div>
-                  <div className="">
-                      <span className="">{data.pubDate}</span>
+                  <div className="what-cap">
+                      <span className="color-1">{data.pubDate}</span>
                       <h4><a href="#">{data.title}</a></h4>
                   </div>
               </Link>

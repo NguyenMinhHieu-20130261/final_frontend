@@ -1,23 +1,52 @@
-import React from 'react';
-import icon from "./icon/newspaper.png"
+import React, {useEffect, useState} from 'react';
 import {cateData} from "../../category-data/cateData";
 import {Link} from "react-router-dom";
+import {RssPage} from "../../RSS/rss";
 const OtherCates = (data) => {
     return (
         <li><Link to={`${data.cate}`}>{data.name}</Link></li>
     )
 }
-const SearchBar = () => {
+const SearchBar = (data) => {
+    const [searchText, setSearchText] = useState("");
+    const [result , setResult] =useState(null)
+
+    const list = RssPage(data.cate);
+    useEffect(() => {
+
+    }, [data]);
+    const toSearchPage = () => {
+
+    }
     return(
-        <div className="col-xl-2 col-lg-2 col-md-4">
-            <div className="header-right-btn ">
-                <i className="fas fa-search magnify"></i>
-                <form>
-                    <input  className="search-bar" type="text" name="search" placeholder="Tìm kiếm"/>
-                </form>
+            <div className="col-xl-2 col-lg-2 col-md-4">
+                <div className="header-right-btn ">
+                    <i className="fas fa-search magnify"
+                    onClick={toSearchPage()}
+                    ></i>
+                    <form>
+                        <input
+                            onChange={(e) => setSearchText(e.target.value)}
+                            className="search-bar" type="text" name="search" placeholder="Tìm kiếm"/>
+                        <ul id="search-result">
+                            <li>
+                                <div> test</div>
+                                {result.map((result) => (
+                                    <li><Link to={result.link}>
+                                        <div className="search-result">
+                                            <p>{result.title}</p>
+                                            <p>{result.pubDate}</p>
+                                        </div>
+                                    </Link></li>
+                                ))}
+                            </li>
+                        </ul>
+
+                    </form>
+                </div>
             </div>
-        </div>
-    )
+        )
+    // }
 }
 const Header = () => {
     return (
@@ -30,10 +59,10 @@ const Header = () => {
 
                                 <div className="col-xl-3 col-lg-3 col-md-3">
                                     <div className="logo">
-                                        <a href="index.html">
+                                        <Link to={"/home"}>
                                             <div id="img"></div>
                                             <p id="site-title"> Báo BaHawst</p>
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                                 <div className="col-xl-9 col-lg-9 col-md-9">
@@ -50,9 +79,9 @@ const Header = () => {
                                 <div className="col-xl-10 col-lg-10 col-md-12 header-flex">
 
                                     <div className="sticky-logo">
-                                        <a href="index.html">
+                                        <Link to={"/home"}>
 
-                                        </a>
+                                        </Link>
                                     </div>
 
                                     <div className="main-menu d-none d-md-block">
@@ -64,14 +93,13 @@ const Header = () => {
                                                 <li><Link to={"/thoi-su-quoc-te"}>Quốc Tế</Link></li>
                                                 <li><Link to={"/kinh-te"}>Kinh tế</Link></li>
                                                 <li><Link to={"/suc-khoe"}>Sức Khỏe</Link></li>
-
                                                 <li><a href="#">Khác</a>
                                                     <ul className="submenu">
                                                         {cateData.slice(5, cateData.length).map(cate =>
                                                             <OtherCates cate={cate.cate} name={cate.name}/>
                                                         )}
-                                                        <li><a href="about.html">Về chúng tôi</a></li>
-                                                        <li><a href="contact.html">Liên hệ chúng tôi</a></li>
+                                                        <li><Link to={"/home"}>Về chúng tôi</Link></li>
+                                                        <li><Link to={"/home"}>Liên hệ chúng tôi</Link></li>
                                                     </ul>
                                                 </li>
                                             </ul>
