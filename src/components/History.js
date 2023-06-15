@@ -57,27 +57,7 @@ const ListCategory = () => {
         <div className="row d-flex justify-content-between">
             <div className="col-lg-3 col-md-3">
                 <div className="section-tittle mb-30">
-                    <h3>Whats New</h3>
-                </div>
-            </div>
-            <div className="col-lg-9 col-md-9">
-                <div className="properties__button">
-                    <nav>
-                        <div className="nav nav-tabs" id="nav-tab" role="tablist">
-                            <Link to={"/thoi-su"} className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
-                                  role="tab" aria-controls="nav-profile" aria-selected="false">Trong Nước</Link>
-                            <Link to={"/thoi-su-quoc-te"} className="nav-item nav-link" id="nav-profile-tab"
-                                  data-toggle="tab"
-                                  role="tab" aria-controls="nav-profile" aria-selected="false">Quốc Tế</Link>
-                            <Link to={"/kinh-te"} className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
-                                  role="tab" aria-controls="nav-profile" aria-selected="false">Kinh Tế</Link>
-                            <Link to={"/suc-khoe"} className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
-                                  role="tab" aria-controls="nav-profile" aria-selected="false">Sức Khỏe</Link>
-                            <Link to={"/giao-duc-khoa-hoc"} className="nav-item nav-link" id="nav-profile-tab"
-                                  data-toggle="tab"
-                                  role="tab" aria-controls="nav-profile" aria-selected="false">Giáo Dục</Link>
-                        </div>
-                    </nav>
+                    <h3>Bài Viết Đã Đọc</h3>
                 </div>
             </div>
         </div>
