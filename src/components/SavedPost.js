@@ -1,12 +1,8 @@
 import React, {useEffect, useState} from "react";
-import {cateData} from "../category-data/cateData";
-import {useLoaderData} from "react-router";
 import {Link} from "react-router-dom";
-import {RssPage} from "../RSS/rss.js";
-import icon from "./layout/icon/newspaper.png"
 
 const PostLeft = (params) => {
-    const listPost = RssPage(params.cate)
+    const listPost = params.list
     const [currentPage, setCurrentPage] = useState(1)
     const [listPostOnePage, setListPostOnePage] = useState(null)
     let numberPage = []
@@ -17,26 +13,27 @@ const PostLeft = (params) => {
         if (listPost) {
             let start = (currentPage - 1) * postNumber;
             let end = start + postNumber;
-            let post = listPost.slice(start,end)
+            let post = listPost.slice(start, end)
             setListPostOnePage(post);
-            console.log(listPost.slice(start,end))
-            console.log(listPostOnePage)
         }
-    },[listPost,currentPage])
+    }, [listPost, currentPage])
+
     function nextPage(page) {
         setCurrentPage(page)
     }
+
     for (let i = 0; i < pageTotal; i++) {
-        let page = i+1
+        let page = i + 1
         numberPage.push(<li className="page-item active">
-            <a className="page-link" onClick={() => {nextPage(page)}}>{page}</a>
+            <a className="page-link" onClick={() => {
+                nextPage(page)
+            }}>{page}</a>
         </li>)
     }
-    console.log(listPostOnePage)
     return (
         <div className="col-lg-8">
-            <ListCategory name={params.name}/>
-            {listPostOnePage? <ListPost cate={params.cate} name={params.name} list={listPostOnePage} key={listPostOnePage}/> : <div></div>}
+            <ListCategory/>
+            {listPostOnePage ? <ListPost list={listPostOnePage}/> : <div></div>}
             <div className="pagination-area pb-45 text-center">
                 <div className="container">
                     <div className="row">
@@ -44,11 +41,7 @@ const PostLeft = (params) => {
                             <div className="single-wrap d-flex justify-content-center">
                                 <nav aria-label="Page navigation example">
                                     <ul className="pagination justify-content-start">
-                                        {/*<li className="page-item"><a className="page-link" href="#"><span*/}
-                                        {/*    className="flaticon-arrow roted"></span></a></li>*/}
                                         {numberPage}
-                                        {/*<li className="page-item"><a className="page-link" href="#"><span*/}
-                                        {/*    className="flaticon-arrow right-arrow"></span></a></li>*/}
                                     </ul>
                                 </nav>
                             </div>
@@ -59,27 +52,37 @@ const PostLeft = (params) => {
         </div>
     )
 }
-const ListCategory = (params) => {
-    return(
+const ListCategory = () => {
+    return (
         <div className="row d-flex justify-content-between">
             <div className="col-lg-3 col-md-3">
                 <div className="section-tittle mb-30">
-                    <h3>{params.name}</h3>
+                    <h3>Bài Viết Đã Đọc</h3>
                 </div>
             </div>
         </div>
     )
 }
 const ListPost = (params) => {
+    let item = []
+    if (params.list) {
+        for (let i = 0; i < params.list.length; i++) {
+            item.push(<PostItem cate={params.list[i].cate}
+                                title={params.list[i].title}
+                                link={params.list[i].link}
+                                img={params.list[i].img}
+                                name={params.list[i].name}/>)
+        }
+    }
     return (
         <div className="row">
             <div className="col-12">
                 <div className="tab-content" id="nav-tabContent">
-                    <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <div className="tab-pane fade show active" id="nav-home" role="tabpanel"
+                         aria-labelledby="nav-home-tab">
                         <div className="whats-news-caption">
                             <div className="row">
-                                {params.list.map(item => <PostItem cate={params.cate} title={item.title} desc={item.desc}
-                                    link={item.link} img={item.img} name={params.name} pubDate={item.pubDate}/>)}
+                                {item ? item : <div></div>}
                             </div>
                         </div>
                     </div>
@@ -94,30 +97,20 @@ const PostItem = (params) => {
         if (!list) {
             list = []
         }
-        if (!list.find(obj => obj.cate === item.cate && obj.img === item.img
-                         && obj.link === item.link && obj.title === item.title)) {
-            list.push(item)
-        }
-        if (list.find(obj => obj.cate === item.cate && obj.img === item.img
-            && obj.link === item.link && obj.title === item.title)) {
-            const filteredList = list.filter(obj => !(obj.cate === item.cate && obj.img === item.img && obj.link === item.link && obj.title === item.title));
-            filteredList.push(item);
-            list = filteredList;
-        }
-        list.reverse()
+        list.push(item)
         localStorage.setItem("history", JSON.stringify(list))
     }
+
     return (
         <div className="col-lg-6 col-md-6">
-            <div className="single-what-news mb-50">
+            <div className="single-what-news mb-100">
                 <div className="what-img">
                     <img src={params.img} alt=""/>
                 </div>
                 <div className="what-cap">
-                    <span className="color1">{params.pubDate}</span>
-                    <button className="ml-10 border-0 bg-white" type="submit"><i className="fas fa-bookmark"></i></button>
-                    <h4><Link to={`/${params.link.substring(20, params.link.indexOf(".htm"))}`}
-                    onClick={() => {historyPost({cate:params.cate, link:params.link, img:params.img, title:params.title, name:params.name})}}>{params.title}</Link></h4>
+                    <span className="color1">{params.name}</span>
+                    <h4><Link to={`/${params.link.substring(20, params.link.indexOf(".htm"))}`}>{params.title}</Link>
+                    </h4>
                 </div>
             </div>
         </div>
@@ -175,21 +168,19 @@ const PostRight = () => {
         </div>
     )
 }
-export const Category = () => {
-    const cate = useLoaderData();
-    return (cate ?
-        <div>
-            <section className="whats-news-area pt-50 pb-20">
-                <div className="container">
-                    <div className="row">
-                        <PostLeft cate={cate.cate} name={cate.name}/>
-                        <PostRight/>
-                    </div>
+export const SavedPost = () => {
+    let listHistory = JSON.parse(localStorage.getItem("history"))
+    if (listHistory === null) {
+        listHistory = []
+    }
+    return (
+        <section className="whats-news-area pt-50 pb-20">
+            <div className="container">
+                <div className="row">
+                    <PostLeft list={listHistory}/>
+                    <PostRight/>
                 </div>
-            </section>
-    </div> : <div></div>)
-}
-export async function loadCategory({params}) {
-    const cate = cateData.find(item => item.cate === params.cate);
-    return (typeof cate === 'undefined' ? null : cate);
+            </div>
+        </section>
+    )
 }

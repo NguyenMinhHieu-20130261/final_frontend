@@ -4,6 +4,7 @@ import {loadCategory, Category} from "../components/Category";
 import App from "../App";
 import {Detail, loadDetail} from "../components/Detail";
 import {History} from "../components/History";
+import {SavedPost} from "../components/SavedPost";
 
 export const router = createBrowserRouter([{
     element: <App/>,
@@ -27,6 +28,9 @@ export const router = createBrowserRouter([{
         }, {
             path:"history",
             element:<History/>
+        }, {
+            path:"saved-post",
+            element:<SavedPost/>
         }
     ]
 }]);
