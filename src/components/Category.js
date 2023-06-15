@@ -32,9 +32,10 @@ const PostLeft = (params) => {
             <a className="page-link" onClick={() => {nextPage(page)}}>{page}</a>
         </li>)
     }
+    console.log(listPostOnePage)
     return (
         <div className="col-lg-8">
-            <ListCategory/>
+            <ListCategory name={params.name}/>
             {listPostOnePage? <ListPost cate={params.cate} name={params.name} list={listPostOnePage} key={listPostOnePage}/> : <div></div>}
             <div className="pagination-area pb-45 text-center">
                 <div className="container">
@@ -58,30 +59,12 @@ const PostLeft = (params) => {
         </div>
     )
 }
-const ListCategory = () => {
+const ListCategory = (params) => {
     return(
         <div className="row d-flex justify-content-between">
             <div className="col-lg-3 col-md-3">
                 <div className="section-tittle mb-30">
-                    <h3>Whats New</h3>
-                </div>
-            </div>
-            <div className="col-lg-9 col-md-9">
-                <div className="properties__button">
-                    <nav>
-                        <div className="nav nav-tabs" id="nav-tab" role="tablist">
-                            <Link to={"/thoi-su"} className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
-                               role="tab" aria-controls="nav-profile" aria-selected="false">Trong Nước</Link>
-                            <Link to={"/thoi-su-quoc-te"} className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
-                                  role="tab" aria-controls="nav-profile" aria-selected="false">Quốc Tế</Link>
-                            <Link to={"/kinh-te"} className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
-                                  role="tab" aria-controls="nav-profile" aria-selected="false">Kinh Tế</Link>
-                            <Link to={"/suc-khoe"} className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
-                                  role="tab" aria-controls="nav-profile" aria-selected="false">Sức Khỏe</Link>
-                            <Link to={"/giao-duc-khoa-hoc"} className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
-                                  role="tab" aria-controls="nav-profile" aria-selected="false">Giáo Dục</Link>
-                        </div>
-                    </nav>
+                    <h3>{params.name}</h3>
                 </div>
             </div>
         </div>
@@ -96,7 +79,7 @@ const ListPost = (params) => {
                         <div className="whats-news-caption">
                             <div className="row">
                                 {params.list.map(item => <PostItem cate={params.cate} title={item.title} desc={item.desc}
-                                    link={item.link} img={item.img} name={params.name}/>)}
+                                    link={item.link} img={item.img} name={params.name} pubDate={item.pubDate}/>)}
                             </div>
                         </div>
                     </div>
@@ -119,12 +102,12 @@ const PostItem = (params) => {
     }
     return (
         <div className="col-lg-6 col-md-6">
-            <div className="single-what-news mb-100">
+            <div className="single-what-news mb-50">
                 <div className="what-img">
                     <img src={params.img} alt=""/>
                 </div>
                 <div className="what-cap">
-                    <span className="color1">{params.name}</span>
+                    <span className="color1">{params.pubDate}</span>
                     <h4><Link to={`/${params.link.substring(20, params.link.indexOf(".htm"))}`}
                     onClick={() => {historyPost({cate:params.cate, link:params.link, img:params.img, title:params.title, name:params.name})}}>{params.title}</Link></h4>
                 </div>
