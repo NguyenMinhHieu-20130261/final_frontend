@@ -36,7 +36,7 @@ function NewContent(props) {
 
         <div className="flex-s-s" style={{display:"flex"}}>
             <span style={{paddingTop: "12px", marginRight: "20px"}}>
-                Share:
+                Chia sẻ:
             </span>
             <div style={{cursor:"pointer"}}>
                 <FacebookShare/>
