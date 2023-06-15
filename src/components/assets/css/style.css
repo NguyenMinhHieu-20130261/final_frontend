@@ -6656,3 +6656,11 @@ b, sup, sub, u, del {
     font-size: 12px;
     margin-bottom: 5px;
 }
+.trending-animated a {
+    font-weight: bold !important;
+}
+
+.trending-animated a:hover {
+    color: #0087ff !important;
+    text-decoration: underline !important;
+}
