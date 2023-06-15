@@ -74,6 +74,8 @@ const Header = () => {
                                                         <li><a href="contact.html">Liên hệ chúng tôi</a></li>
                                                     </ul>
                                                 </li>
+                                                <li><Link to={"/history"}><i className="fas fa-clock"></i></Link></li>
+                                                <li><Link to={"/saved-post"}><i className="fas fa-bookmark"></i></Link></li>
                                             </ul>
                                         </nav>
                                     </div>

@@ -13,7 +13,6 @@ const PostLeft = (params) => {
     let postNumber = 8
     let pageTotal = Math.ceil(listPost.length / postNumber)
 
-
     useEffect(() => {
         if (listPost) {
             let start = (currentPage - 1) * postNumber;
