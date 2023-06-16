@@ -1,5 +1,5 @@
 import React from 'react';
-import icon from "./icon/newspaper.png"
+import logo from "./icon/logo.png"
 import {cateData} from "../../category-data/cateData";
 import {Link} from "react-router-dom";
 const OtherCates = (data) => {
@@ -27,18 +27,9 @@ const Header = () => {
                     <div className="header-mid d-none d-md-block">
                         <div className="container">
                             <div className="row d-flex align-items-center">
-
-                                <div className="col-xl-3 col-lg-3 col-md-3">
-                                    <div className="logo">
-                                        <a href="index.html">
-                                            <div id="img"></div>
-                                            <p id="site-title"> Báo BaHawst</p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div className="col-xl-9 col-lg-9 col-md-9">
+                                <div className="col-xl-12 col-lg-12 col-md-12">
                                     <div className="header-banner f-right ">
-
+                                        <Link to={"/home"}><img src={logo} alt="LOGO" style={{borderRadius:"20px"}}></img></Link>
                                     </div>
                                 </div>
                             </div>
