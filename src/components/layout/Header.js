@@ -5,12 +5,12 @@ import {Link} from "react-router-dom";
 import {SearchBar} from "./SearchBar";
 const OtherCates = (data) => {
     return (
-        <li><Link to={`${data.cate}`}>{data.name}</Link></li>
+        <li key={"OtherCates" + data.name}><Link to={`${data.cate}`}>{data.name}</Link></li>
     )
 }
 const Header = () => {
     return (
-        <header>
+        <header key={"Header"}>
             <div className="header-area">
                 <div className="main-header ">
                     <div className="header-mid d-none d-md-block">
@@ -43,10 +43,10 @@ const Header = () => {
                                                 <li><Link to={"/kinh-te"}>Kinh tế</Link></li>
                                                 <li><Link to={"/suc-khoe"}>Sức Khỏe</Link></li>
 
-                                                <li><a href="#">Khác</a>
+                                                <li><p>Khác</p>
                                                     <ul className="submenu">
                                                         {cateData.slice(5, cateData.length).map(cate =>
-                                                            <OtherCates cate={cate.cate} name={cate.name}/>
+                                                            <OtherCates key={cate.name} cate={cate.cate} name={cate.name}/>
                                                         )}
                                                         <li><Link to={"/"}>Về chúng tôi</Link></li>
                                                         <li><Link to={"/"}>Liên hệ chúng tôi</Link></li>
@@ -58,7 +58,7 @@ const Header = () => {
                                         </nav>
                                     </div>
                                 </div>
-                                <SearchBar></SearchBar>
+                                <SearchBar/>
                                 <div className="col-12">
                                     <div className="mobile_menu d-block d-md-none"></div>
                                 </div>
