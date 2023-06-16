@@ -7,7 +7,7 @@ import {useLoaderData} from "react-router";
 const ListResult = (data) => {
     return (
         <ul className="search-list d-flex" style={{position:"absolute",flexWrap :"wrap"}}>
-            {data.list.map(item => <ResultItem link={item.link} img={item.img} pubDate={item.pubDate} title={item.title}/>)}
+            {data.list.map(item => <ResultItem link={item.link} img={item.img} pubDate={item.pubDate} title={item.title} key={item.cate}/>)}
         </ul>
     )
 }
@@ -47,13 +47,14 @@ export const SearchBar = (data) => {
             setResult(filteredResult);
             setSearchList(filteredResult);
         } else {
-            setSearchList();
+            setSearchList(null);
         }
     }, [list,searchText]);
+    const encodedSearchText = encodeURIComponent(searchText);
     return(
         <div className="col-xl-2 col-lg-2 col-md-4">
             <div className="header-right-btn ">
-                <Link to={"/search"}>
+                <Link to={`/search?search=${encodedSearchText}`}>
                     <i className="fas fa-search magnify"></i>
                 </Link>
                 <form>

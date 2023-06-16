@@ -1,15 +1,14 @@
 import {cateData} from "../../category-data/cateData";
 import {Link} from "react-router-dom";
-import {SearchingBar, SearchBar} from "./SearchBar";
+import {SearchBar} from "./SearchBar";
 const OtherCates = (data) => {
     return (
         <li><Link to={`${data.cate}`}>{data.name}</Link></li>
     )
 }
 let cate = ""
-const Header = () => {
+const HeaderContent = () => {
     return (
-        <header>
             <div className="header-area">
                 <div className="main-header ">
                     <div className="header-mid d-none d-md-block">
@@ -50,10 +49,10 @@ const Header = () => {
                                                 <li><Link to={"/thoi-su-quoc-te"}>Quốc Tế</Link></li>
                                                 <li><Link to={"/kinh-te"}>Kinh tế</Link></li>
                                                 <li><Link to={"/suc-khoe"}>Sức Khỏe</Link></li>
-                                                <li><a href="#">Khác</a>
+                                                <li><p>Khác</p>
                                                     <ul className="submenu">
                                                         {cateData.slice(5, cateData.length).map(cate =>
-                                                            <OtherCates cate={cate.cate} name={cate.name}/>
+                                                            <OtherCates key={cate.cate} cate={cate.cate} name={cate.name}/>
                                                         )}
                                                         <li><Link to={"/home"}>Về chúng tôi</Link></li>
                                                         <li><Link to={"/home"}>Liên hệ chúng tôi</Link></li>
@@ -74,8 +73,13 @@ const Header = () => {
                     </div>
                 </div>
             </div>
-        </header>
     );
 };
 
-export default Header;
+export const Header = () =>{
+    return(
+        <header>
+            <HeaderContent key={cate.cate}/>
+        </header>
+    )
+};

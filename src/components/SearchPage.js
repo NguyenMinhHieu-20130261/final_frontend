@@ -5,22 +5,25 @@ import {Link} from "react-router-dom";
 import {RssPage} from "../RSS/rss.js";
 
 const SearchLeft = (params) => {
-    const searchPost = RssPage("tin-moi-nhat")
+    const searchIndex = params.link.substring(34,params.link.indexOf(".htm"));
+    const list = RssPage(params.cate)
+    console.log(searchIndex)
     const [currentPage, setCurrentPage] = useState(1)
     const [listSearch, setListSearch] = useState(null)
     let numberPage = []
     let postNumber = 4
-    let pageTotal = Math.ceil(searchPost.length / postNumber)
-
+    let pageTotal = Math.ceil(list.length / postNumber)
     useEffect(() => {
-        if (searchPost) {
+        if (list && searchIndex.trim() !== "") {
+            let filteredResult = list.filter(item => item.title.toUpperCase().indexOf(searchIndex.toUpperCase()) !== -1);
             let start = (currentPage - 1) * postNumber;
             let end = start + postNumber;
-            let post = searchPost.slice(start, end)
+            let post = filteredResult.slice(start, end)
             setListSearch(post);
-            console.log(listSearch)
+        } else {
+            setListSearch(null);
         }
-    }, [searchPost, currentPage])
+    }, [list,setListSearch,currentPage]);
 
     function nextPage(page) {
         setCurrentPage(page)

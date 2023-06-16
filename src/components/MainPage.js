@@ -25,6 +25,7 @@ const Trending = (data) => {
                                   {list.slice(1, 4)
                                       .map(item => <SidePostTrending
                                           title={item.title}
+                                          key={item.title}
                                           img={item.img}
                                           pubDate={item.pubDate}
                                           link={item.link}
@@ -62,11 +63,9 @@ const SidePostTrending = (data) => {
     return(
         <div className="col-lg-4">
             <div className="single-bottom mb-20">
-                <Link to={"/"+ data.link.substring(20,data.link.indexOf(".htm"))}>
+                <Link to={"/"+ data.link.substring(20,data.link.indexOf(".htm"))} key={"sideTrending" + data.title}>
                     <div className="trend-bottom-img mb-15" style={{marginTop: "5px"}}>
-                        <img src={data.img} alt="IMG"
-                             // title={data.description}
-                        ></img>
+                        <img src={data.img} alt="IMG"></img>
                     </div>
                     <div className="trend-bottom-cap">
                         <span className="color1">{data.pubDate}</span>
@@ -81,8 +80,8 @@ const Tag = (data) => {
     return(
     <div className="tag-container">
         <Link to={`${data.cate}`} style={{
-            margin:"0 !important"
-        }}><p className="tag-item">
+            margin:"0 !important"}}
+              key={"cateTag "+ data.name}><p className="tag-item">
             {data.name}</p></Link>
     </div>
     )
@@ -91,22 +90,21 @@ const LatestPost = (data) => {
   return(
       <div className="col-lg-6 col-md-6">
           <div className="single-what-news mb-40">
-              <Link to={"/"+ data.link.substring(20,data.link.indexOf(".htm"))}>
+              <Link to={"/"+ data.link.substring(20,data.link.indexOf(".htm"))} key={"latestPostItem" + data.title}>
                   <div className="what-img">
                       <img src={data.img}></img>
                   </div>
                   <div className="what-cap">
                       <span className="color-1">{data.pubDate}</span>
-                      <h4><a href="#">{data.title}</a></h4>
+                      <h4><p>{data.title}</p></h4>
                   </div>
               </Link>
           </div>
       </div>
   )
 }
-const latest = "tin-moi-nhat.rss";
-const Latest = (data) => {
-    const [itemContent, setItem] = useState(latest)
+const Latest = () => {
+    const [itemContent, setItem] = useState( "tin-moi-nhat")
     const list = RssPage(itemContent.cate)
     if (list.length < 1) {
         return (<div>Error</div>)
@@ -165,7 +163,8 @@ const Latest = (data) => {
                                                       pubDate={item.pubDate}
                                                       link={item.link}
                                                       cate={itemContent.cate}
-                                                      description={item.description}/>)}
+                                                      key={item.title}
+                                                      />)}
                                           </div>
                                       </div>
                                   </div>
@@ -179,10 +178,9 @@ const Latest = (data) => {
                           <h3>Danh mục</h3>
                       </div>
                       <div className="mb-20 d-flex"
-                      style={{flexWrap :"wrap"}}
-                      >
+                      style={{flexWrap :"wrap"}}>
                           {cateData.slice(5, cateData.length).map(cate =>
-                              <Tag cate={cate.cate} name={cate.name}/>
+                              <Tag key={cate.name} cate={cate.cate} name={cate.name}/>
                           )}
                       </div>
                       <div className="news-poster d-none d-lg-block">
@@ -198,11 +196,9 @@ const CatePostItem = (data) => {
   return (
       <div className="col-lg-4">
           <div className="single-bottom mb-35">
-              <Link to={"/"+ data.link.substring(20,data.link.indexOf(".htm"))}>
+              <Link to={"/"+ data.link.substring(20,data.link.indexOf(".htm"))} key={"catePostItem" + data.title}>
                   <div className="trend-bottom-img mb-30">
-                      <img src={data.img} alt="IMG"
-                          // title={data.description}
-                      ></img>
+                      <img src={data.img} alt="IMG"/>
                   </div>
                   <div className="trend-bottom-cap">
                       <span className="color1">{data.pubDate}</span>
@@ -220,7 +216,7 @@ const CatePost = (data) => {
         return (<div>Lỗi cate</div>)
     }
   return(
-    <div className="trending-area fix">
+    <div className="trending-area fix" key={"catePost" + data.cate}>
         <div className="container">
             <div className="trending-main">
                 <div className="row">
@@ -238,6 +234,7 @@ const CatePost = (data) => {
                                     .map(item => <CatePostItem
                                         title={item.title}
                                         img={item.img}
+                                        key ={item.title}
                                         pubDate={item.pubDate}
                                         link={item.link}
                                         cate={itemContent.cate}
@@ -257,7 +254,7 @@ export const Home = () => {
       style={{marginTop:"25px"}}>
           <Trending/>
           <Latest/>
-          {cateData.slice(1, 4).map(item => <CatePost cate={item.cate} name={item.name} />)}
+          {cateData.slice(1, 4).map(item => <CatePost key={item.cate} cate={item.cate} name={item.name} />)}
       </div>
   )
 }
