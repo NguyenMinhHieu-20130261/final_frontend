@@ -7,7 +7,7 @@ import {useLoaderData} from "react-router";
 const ListResult = (data) => {
     return (
         <ul className="search-list d-flex" style={{position:"absolute",flexWrap :"wrap"}}>
-            {data.list.map(item => <ResultItem link={item.link} img={item.img} pubDate={item.pubDate} title={item.title} key={item.cate}/>)}
+            {data.list.map(item => <ResultItem link={item.link} img={item.img} pubDate={item.pubDate} title={item.title} key={item.title}/>)}
         </ul>
     )
 }
@@ -25,7 +25,7 @@ const ErrorResult = () => {
 const ResultItem = (result) => {
     return (
         <li className="result-search">
-            <Link to={"/"+ result.link.substring(20,result.link.indexOf(".htm"))} style={{padding: "0 !important"}}>
+            <Link to={"/"+ result.link.substring(20,result.link.indexOf(".htm"))} style={{padding: "0 !important"}} key={"resultItem" + result.title}>
                 <div className="search-item"
                      style={{border:"1px solid black", backgroundColor:"white",width:"205px"}}>
                     <div style={{}}><p>{result.title}</p></div>
@@ -61,7 +61,7 @@ export const SearchBar = (data) => {
                     <input
                         onChange={(e) => setSearchText(e.target.value)}
                         className="search-bar" type="text" name="search" placeholder="Tìm kiếm"/>
-                    {searchList && <ListResult key={cate.cate} list={searchList}></ListResult>}
+                    {searchList && <ListResult key={data.title} list={searchList}></ListResult>}
                     {searchList && searchText.trim() !== "" && searchList.length === 0 && (
                         <ErrorResult/>
                     )}
