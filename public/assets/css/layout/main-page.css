@@ -27,3 +27,6 @@
 .result-search a{
     padding: 0 !important;
 }
+.bg-white{
+    cursor: pointer;
+}

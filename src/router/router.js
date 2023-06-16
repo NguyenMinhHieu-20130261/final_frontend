@@ -5,7 +5,9 @@ import App from "../App";
 import {Detail, loadDetail} from "../components/Detail";
 import {History} from "../components/History";
 import {SavedPost} from "../components/SavedPost";
-import {loadSearch, Search} from "../components/SearchPage";
+import {
+    // loadSearch,
+    Search} from "../components/SearchPage";
 
 export const router = createBrowserRouter([{
     element: <App/>,
@@ -35,6 +37,6 @@ export const router = createBrowserRouter([{
         }, {
             path:"search",
             element:<Search/>,
-            loader :loadSearch
+            // loader :loadSearch
         }    ]
 }]);

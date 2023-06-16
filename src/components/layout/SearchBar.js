@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {RssPage} from "../../RSS/rss";
 import {Link} from "react-router-dom";
-import {useLoaderData} from "react-router";
-
 
 const ListResult = (data) => {
     return (
@@ -38,24 +36,27 @@ const ResultItem = (result) => {
 export const SearchBar = (data) => {
     const [cate, setCate] = useState(data);
     const [searchText, setSearchText] = useState("");
-    const [result , setResult] =useState(null)
     const [searchList , setSearchList] =useState(null)
     const list = RssPage(cate.cate);
     useEffect(() => {
         if (list && searchText.trim() !== "") {
             let filteredResult = list.filter(item => item.title.toUpperCase().indexOf(searchText.toUpperCase()) !== -1);
-            setResult(filteredResult);
             setSearchList(filteredResult);
         } else {
             setSearchList(null);
         }
     }, [list,searchText]);
+    function saveSearch() {
+        localStorage.setItem("search", searchText)
+        console.log(searchText)
+        console.log(localStorage.getItem("search"))
+    }
     const encodedSearchText = encodeURIComponent(searchText);
     return(
         <div className="col-xl-2 col-lg-2 col-md-4">
             <div className="header-right-btn ">
                 <Link to={`/search?search=${encodedSearchText}`}>
-                    <i className="fas fa-search magnify"></i>
+                    <i className="fas fa-search magnify" onClick={saveSearch}></i>
                 </Link>
                 <form>
                     <input
@@ -69,9 +70,4 @@ export const SearchBar = (data) => {
             </div>
         </div>
     )
-}
-export function SearchingBar() {
-    const cate = useLoaderData();
-    return (cate ?
-      <SearchBar key={cate.cate} cate={cate.cate}/> : <div style={{position : "relative"}}><p>Error</p></div>)
 }

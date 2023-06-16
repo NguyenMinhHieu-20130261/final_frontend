@@ -3,6 +3,53 @@ import {cateData} from "../category-data/cateData";
 import {Link} from "react-router-dom";
 import {RssPage} from "../RSS/rss.js";
 
+function historyPost(item) {
+    let list = JSON.parse(localStorage.getItem("history"))
+    if (!list) {
+        list = []
+    }
+    if (!list.find(obj => obj.title === item.title && obj.desc === item.desc
+        && obj.pubDate === item.pubDate && obj.img === item.img
+        && obj.link === item.link)) {
+        list.push(item)
+    } else {
+        const filteredList = list.filter(obj => !(obj.title === item.title && obj.desc === item.desc
+            && obj.pubDate === item.pubDate && obj.img === item.img
+            && obj.link === item.link));
+        filteredList.reverse();
+        filteredList.push(item);
+        list = filteredList;
+    }
+    list.reverse()
+    localStorage.setItem("history", JSON.stringify(list))
+}
+
+let listSaved = JSON.parse(localStorage.getItem("saved-post"))
+if (!listSaved) {
+    listSaved = []
+}
+const checkSavedPost = (item) => {
+    return listSaved.find(obj => obj.title === item.title && obj.desc === item.desc
+        && obj.pubDate === item.pubDate && obj.img === item.img
+        && obj.link === item.link)
+}
+
+function savedPost(item) {
+    if (!listSaved.find(obj => obj.title === item.title && obj.desc === item.desc
+        && obj.pubDate === item.pubDate && obj.img === item.img
+        && obj.link === item.link)) {
+        listSaved.push(item)
+    } else {
+        const filteredList = listSaved.filter(obj => !(obj.title === item.title && obj.desc === item.desc
+            && obj.pubDate === item.pubDate && obj.img === item.img
+            && obj.link === item.link));
+        filteredList.reverse();
+        listSaved = filteredList
+    }
+    listSaved.reverse()
+    localStorage.setItem("saved-post", JSON.stringify(listSaved))
+    window.location.reload()
+}
 const Trending = (data) => {
     const [itemContent, setItem] = useState(data)
     const list = RssPage(itemContent.cate)
@@ -69,7 +116,29 @@ const SidePostTrending = (data) => {
                     </div>
                     <div className="trend-bottom-cap">
                         <span className="color1">{data.pubDate}</span>
-                        <h4>{data.title}</h4>
+                        <button className={`ml-10 border-0 bg-white 
+                    ${checkSavedPost({
+                            title: data.title, desc: data.desc,
+                            pubDate: data.pubDate, link: data.link, img: data.img
+                        }) ? `text-warning` : ``}`}
+                                type="reset"
+                                onClick={() => {
+                                    savedPost({
+                                        title: data.title, desc: data.desc,
+                                        pubDate: data.pubDate, link: data.link, img: data.img
+                                    })
+                                }}><i className="fas fa-bookmark"></i></button>
+                        <h4>
+                            <Link to={`/${data.link.substring(20, data.link.indexOf(".htm"))}`}
+                                  key={"SearchItem" + data.title}
+                                  onClick={() => {
+                                      historyPost({
+                                          title: data.title, desc: data.desc,
+                                          pubDate: data.pubDate, link: data.link, img: data.img
+                                      })
+                                  }}>{data.title}
+                            </Link>
+                        </h4>
                     </div>
                 </Link>
             </div>
@@ -87,7 +156,7 @@ const Tag = (data) => {
     )
 }
 const LatestPost = (data) => {
-  return(
+    return(
       <div className="col-lg-6 col-md-6">
           <div className="single-what-news mb-40">
               <Link to={"/"+ data.link.substring(20,data.link.indexOf(".htm"))} key={"latestPostItem" + data.title}>
@@ -96,7 +165,29 @@ const LatestPost = (data) => {
                   </div>
                   <div className="what-cap">
                       <span className="color-1">{data.pubDate}</span>
-                      <h4><p>{data.title}</p></h4>
+                      <button className={`ml-10 border-0 bg-white 
+                    ${checkSavedPost({
+                          title: data.title, desc: data.desc,
+                          pubDate: data.pubDate, link: data.link, img: data.img
+                      }) ? `text-warning` : ``}`}
+                              type="reset"
+                              onClick={() => {
+                                  savedPost({
+                                      title: data.title, desc: data.desc,
+                                      pubDate: data.pubDate, link: data.link, img: data.img
+                                  })
+                              }}><i className="fas fa-bookmark"></i></button>
+                      <h4>
+                          <Link to={`/${data.link.substring(20, data.link.indexOf(".htm"))}`}
+                                key={"SearchItem" + data.title}
+                                onClick={() => {
+                                    historyPost({
+                                        title: data.title, desc: data.desc,
+                                        pubDate: data.pubDate, link: data.link, img: data.img
+                                    })
+                                }}>{data.title}
+                          </Link>
+                      </h4>
                   </div>
               </Link>
           </div>
@@ -202,7 +293,30 @@ const CatePostItem = (data) => {
                   </div>
                   <div className="trend-bottom-cap">
                       <span className="color1">{data.pubDate}</span>
-                      <h4>{data.title}</h4>
+                      <button className={`ml-10 border-0 bg-white 
+                    ${checkSavedPost({
+                          title: data.title, desc: data.desc,
+                          pubDate: data.pubDate, link: data.link, img: data.img
+                      }) ? `text-warning` : ``}`}
+                              type="reset"
+                              onClick={() => {
+                                  savedPost({
+                                      title: data.title, desc: data.desc,
+                                      pubDate: data.pubDate, link: data.link, img: data.img
+                                  })
+                              }}><i className="fas fa-bookmark"></i></button>
+                      <h4>
+                          <Link to={`/${data.link.substring(20, data.link.indexOf(".htm"))}`}
+                                key={"SearchItem" + data.title}
+                                onClick={() => {
+                                    historyPost({
+                                        title: data.title, desc: data.desc,
+                                        pubDate: data.pubDate, link: data.link, img: data.img
+                                    })
+                                }}>
+                              {data.title}
+                          </Link>
+                      </h4>
                   </div>
               </Link>
           </div>
