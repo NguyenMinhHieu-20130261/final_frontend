@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+import {cateData} from "../category-data/cateData";
 
 const PostLeft = (params) => {
     const listPost = params.list
@@ -25,9 +26,9 @@ const PostLeft = (params) => {
     for (let i = 0; i < pageTotal; i++) {
         let page = i + 1
         numberPage.push(<li className="page-item active">
-            <a className="page-link" onClick={() => {
+            <p className="page-link" onClick={() => {
                 nextPage(page)
-            }}>{page}</a>
+            }}>{page}</p>
         </li>)
     }
     return (
@@ -173,57 +174,33 @@ const PostItem = (params) => {
         </div>
     )
 }
+const Tag = (data) => {
+    return(
+        <div className="tag-container">
+            <Link to={`/${data.cate}`} style={{
+                margin:"0 !important"
+            }}><p className="tag-item">
+                {data.name}</p></Link>
+        </div>
+    )
+}
 const PostRight = () => {
     return (
         <div className="col-lg-4">
-            <div className="section-tittle mb-40">
-                <h3>Follow Us</h3>
+            <div className="section-tittle mb-15">
+                <h3>Danh mục</h3>
             </div>
-            <div className="single-follow mb-45">
-                <div className="single-box">
-                    <div className="follow-us d-flex align-items-center">
-                        <div className="follow-social">
-                            <a href="#"><img src="assets/img/news/icon-fb.png" alt=""/></a>
-                        </div>
-                        <div className="follow-count">
-                            <span>8,045</span>
-                            <p>Fans</p>
-                        </div>
-                    </div>
-                    <div className="follow-us d-flex align-items-center">
-                        <div className="follow-social">
-                            <a href="#"><img src="assets/img/news/icon-tw.png" alt=""/></a>
-                        </div>
-                        <div className="follow-count">
-                            <span>8,045</span>
-                            <p>Fans</p>
-                        </div>
-                    </div>
-                    <div className="follow-us d-flex align-items-center">
-                        <div className="follow-social">
-                            <a href="#"><img src="assets/img/news/icon-ins.png" alt=""/></a>
-                        </div>
-                        <div className="follow-count">
-                            <span>8,045</span>
-                            <p>Fans</p>
-                        </div>
-                    </div>
-                    <div className="follow-us d-flex align-items-center">
-                        <div className="follow-social">
-                            <a href="#"><img src="assets/img/news/icon-yo.png" alt=""/></a>
-                        </div>
-                        <div className="follow-count">
-                            <span>8,045</span>
-                            <p>Fans</p>
-                        </div>
-                    </div>
-                </div>
+            <div className="mb-20 d-flex"
+                 style={{flexWrap :"wrap"}}
+            >
+                {cateData.slice(5, cateData.length).map(cate =>
+                    <Tag cate={cate.cate} name={cate.name}/>
+                )}
             </div>
             <div className="news-poster d-none d-lg-block">
                 <img src="assets/img/news/news_card.jpg" alt=""/>
             </div>
-        </div>
-    )
+        </div>    )
 }
 export const SavedPost = () => {
     let listSavedPost = JSON.parse(localStorage.getItem("saved-post"))

@@ -38,6 +38,7 @@ export const SearchBar = (data) => {
     const [searchText, setSearchText] = useState("");
     const [searchList , setSearchList] =useState(null)
     const list = RssPage(cate.cate);
+    const encodedSearchText = encodeURIComponent(searchText);
     useEffect(() => {
         if (list && searchText.trim() !== "") {
             let filteredResult = list.filter(item => item.title.toUpperCase().indexOf(searchText.toUpperCase()) !== -1);
@@ -47,20 +48,34 @@ export const SearchBar = (data) => {
         }
     }, [list,searchText]);
     function saveSearch() {
-        localStorage.setItem("search", searchText)
-        console.log(searchText)
-        console.log(localStorage.getItem("search"))
+        if (searchText.trim() !== "") {
+            localStorage.setItem("search", searchText);
+            console.log(searchText);
+            console.log(localStorage.getItem("search"));
+            const encodedSearchText = encodeURIComponent(searchText);
+            const searchURL = `/search?search=${encodedSearchText}`;
+            // kiểm tra địa chỉ
+            if (window.location.pathname === searchURL) {
+                // trùng thì reload trang
+                window.location.reload();
+            } else {
+                // ko trùng thì chuyển tới trang search
+                window.location.href = searchURL;
+            }
+        }
+        setSearchText("");
     }
-    const encodedSearchText = encodeURIComponent(searchText);
     return(
         <div className="col-xl-2 col-lg-2 col-md-4">
             <div className="header-right-btn ">
                 <Link to={`/search?search=${encodedSearchText}`}>
-                    <i className="fas fa-search magnify" onClick={saveSearch}></i>
+                    <i className="fas fa-search magnify" onClick={() => saveSearch()}></i>
                 </Link>
                 <form>
                     <input
-                        onChange={(e) => setSearchText(e.target.value)}
+                        onChange={(e) =>{
+                            setSearchText(e.target.value);
+                        }}
                         className="search-bar" type="text" name="search" placeholder="Tìm kiếm"/>
                     {searchList && <ListResult key={data.title} list={searchList}></ListResult>}
                     {searchList && searchText.trim() !== "" && searchList.length === 0 && (

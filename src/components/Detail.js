@@ -9,7 +9,7 @@ import {Comments, FacebookProvider} from "react-facebook";
 
 export const Breadcrumb = (props) => {
     return (
-        <div className="row">
+        <div className="row" key={"Breadcrumb" + props.cate}>
             <div className="col-lg-12">
                 <div className="trending-tittle">
                     <div className="trending-animated" style={{display: "flex"}}>
@@ -43,7 +43,7 @@ export const FacebookComment = (props) => {
 }
 export const LatestItem = (item) => {
     return (
-        <div className="row">
+        <div className="row"  key={"LatestItem" + item.title}>
             <div className="single-bottom mb-20" style={{marginLeft:"35px"}}>
                 <Link to={`/${item.link.substring(20, item.link.indexOf(".htm"))}`}>
                     <div className="trend-bottom-img mb-15" style={{marginTop: "5px"}}>
@@ -74,12 +74,15 @@ export const LatestPost = () => {
             </div>
 
             <ul className="row">
-                {list.slice(0, 4).map(item => <LatestItem title={item.title}
-                                                          img={item.img}
-                                                          pubDate={item.pubDate}
-                                                          link={item.link}
-                                                          cate={itemContent.cate}
-                                                          description={item.description}/>)}
+                {list.slice(0, 4).map(item => <LatestItem
+                    title={item.title}
+                    img={item.img}
+                    pubDate={item.pubDate}
+                    link={item.link}
+                    cate={itemContent.cate}
+                    description={item.description}
+                    key={item.title}
+                />)}
             </ul>
         </div>
     )
@@ -112,7 +115,7 @@ export function Detail() {
             <div className="container">
                 <div key={data.link}>
                     {post ? (
-                        <div><Breadcrumb item={item} key={data} cate={data.cate} title={post.title}/>
+                        <div><Breadcrumb item={item} key={data.title} cate={data.cate} title={post.title}/>
                             <Content link={data.link} key={post} post={post} cate={data.cate}/></div>
                     ) : (
                         <h4 style={{textAlign: "center", marginBottom: "50px", marginTop: "50px"}}> Đang hiển thị chi

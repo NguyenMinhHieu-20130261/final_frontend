@@ -110,7 +110,6 @@ const SidePostTrending = (data) => {
     return(
         <div className="col-lg-4">
             <div className="single-bottom mb-20">
-                <Link to={"/"+ data.link.substring(20,data.link.indexOf(".htm"))} key={"sideTrending" + data.title}>
                     <div className="trend-bottom-img mb-15" style={{marginTop: "5px"}}>
                         <img src={data.img} alt="IMG"></img>
                     </div>
@@ -130,7 +129,7 @@ const SidePostTrending = (data) => {
                                 }}><i className="fas fa-bookmark"></i></button>
                         <h4>
                             <Link to={`/${data.link.substring(20, data.link.indexOf(".htm"))}`}
-                                  key={"SearchItem" + data.title}
+                                  key={"SidePostTrending" + data.title}
                                   onClick={() => {
                                       historyPost({
                                           title: data.title, desc: data.desc,
@@ -140,7 +139,6 @@ const SidePostTrending = (data) => {
                             </Link>
                         </h4>
                     </div>
-                </Link>
             </div>
         </div>
     )
@@ -148,7 +146,7 @@ const SidePostTrending = (data) => {
 const Tag = (data) => {
     return(
     <div className="tag-container">
-        <Link to={`${data.cate}`} style={{
+        <Link to={`/${data.cate}`} style={{
             margin:"0 !important"}}
               key={"cateTag "+ data.name}><p className="tag-item">
             {data.name}</p></Link>
@@ -159,9 +157,8 @@ const LatestPost = (data) => {
     return(
       <div className="col-lg-6 col-md-6">
           <div className="single-what-news mb-40">
-              <Link to={"/"+ data.link.substring(20,data.link.indexOf(".htm"))} key={"latestPostItem" + data.title}>
                   <div className="what-img">
-                      <img src={data.img}></img>
+                      <img src={data.img} alt={"loading ảnh"}/>
                   </div>
                   <div className="what-cap">
                       <span className="color-1">{data.pubDate}</span>
@@ -178,8 +175,8 @@ const LatestPost = (data) => {
                                   })
                               }}><i className="fas fa-bookmark"></i></button>
                       <h4>
-                          <Link to={`/${data.link.substring(20, data.link.indexOf(".htm"))}`}
-                                key={"SearchItem" + data.title}
+                          <Link to={`/${data.link.substring(20, data.link.indexOf(".htm"))} `}
+                                key={"latestPostItem" + data.title}
                                 onClick={() => {
                                     historyPost({
                                         title: data.title, desc: data.desc,
@@ -189,12 +186,11 @@ const LatestPost = (data) => {
                           </Link>
                       </h4>
                   </div>
-              </Link>
           </div>
       </div>
   )
 }
-const Latest = () => {
+const Latest = (data) => {
     const [itemContent, setItem] = useState( "tin-moi-nhat")
     const list = RssPage(itemContent.cate)
     if (list.length < 1) {
@@ -212,29 +208,15 @@ const Latest = () => {
                               </div>
                           </div>
                           <div className="col-lg-9 col-md-9">
-                              <div className="properties__button">
-                                  {/*<nav>*/}
-                                  {/*    <div className="nav nav-tabs" id="nav-tab" role="tablist">*/}
-                                  {/*        <a className="nav-item nav-link active" id="nav-home-tab" data-toggle="tab"*/}
-                                  {/*           href="#nav-home" role="tab" aria-controls="nav-home"*/}
-                                  {/*           aria-selected="true">All</a>*/}
-                                  {/*        <a className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"*/}
-                                  {/*           href="#nav-profile" role="tab" aria-controls="nav-profile"*/}
-                                  {/*           aria-selected="false">Lifestyle</a>*/}
-                                  {/*        <a className="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"*/}
-                                  {/*           href="#nav-contact" role="tab" aria-controls="nav-contact"*/}
-                                  {/*           aria-selected="false">Travel</a>*/}
-                                  {/*        <a className="nav-item nav-link" id="nav-last-tab" data-toggle="tab"*/}
-                                  {/*           href="#nav-last" role="tab" aria-controls="nav-contact"*/}
-                                  {/*           aria-selected="false">Fashion</a>*/}
-                                  {/*        <a className="nav-item nav-link" id="nav-Sports" data-toggle="tab"*/}
-                                  {/*           href="#nav-nav-Sport" role="tab" aria-controls="nav-contact"*/}
-                                  {/*           aria-selected="false">Sports</a>*/}
-                                  {/*        <a className="nav-item nav-link" id="nav-technology" data-toggle="tab"*/}
-                                  {/*           href="#nav-techno" role="tab" aria-controls="nav-contact"*/}
-                                  {/*           aria-selected="false">Technology</a>*/}
-                                  {/*    </div>*/}
-                                  {/*</nav>*/}
+                              <div className="see-more"
+                              style={{
+                                  textAlign: "end",
+                                  fontSize: "17px",
+                                  marginTop: "6px",
+                                  marginRight: "6px",
+                              }}
+                              >
+                                  <Link to={`/${data.cate}`}>Xem thêm</Link>
                               </div>
                           </div>
                       </div>
@@ -287,7 +269,6 @@ const CatePostItem = (data) => {
   return (
       <div className="col-lg-4">
           <div className="single-bottom mb-35">
-              <Link to={"/"+ data.link.substring(20,data.link.indexOf(".htm"))} key={"catePostItem" + data.title}>
                   <div className="trend-bottom-img mb-30">
                       <img src={data.img} alt="IMG"/>
                   </div>
@@ -307,7 +288,7 @@ const CatePostItem = (data) => {
                               }}><i className="fas fa-bookmark"></i></button>
                       <h4>
                           <Link to={`/${data.link.substring(20, data.link.indexOf(".htm"))}`}
-                                key={"SearchItem" + data.title}
+                                key={"catePostItem" + data.title}
                                 onClick={() => {
                                     historyPost({
                                         title: data.title, desc: data.desc,
@@ -318,7 +299,6 @@ const CatePostItem = (data) => {
                           </Link>
                       </h4>
                   </div>
-              </Link>
           </div>
       </div>
   )

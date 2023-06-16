@@ -3,7 +3,6 @@ import {cateData} from "../category-data/cateData";
 import {useLoaderData} from "react-router";
 import {Link} from "react-router-dom";
 import {RssPage} from "../RSS/rss.js";
-import icon from "./layout/icon/newspaper.png"
 
 const PostLeft = (params) => {
     const listPost = RssPage(params.cate)
@@ -31,27 +30,23 @@ const PostLeft = (params) => {
     for (let i = 0; i < pageTotal; i++) {
         let page = i + 1
         numberPage.push(<li className="page-item active">
-            <a className="page-link" onClick={() => {
+            <p className="page-link" onClick={() => {
                 nextPage(page)
-            }}>{page}</a>
+            }}>{page}</p>
         </li>)
     }
     return (
         <div className="col-lg-8">
             <ListCategory name={params.name}/>
             {listPostOnePage ? <ListPost list={listPostOnePage} key={listPostOnePage}/> : <div></div>}
-            <div className="pagination-area pb-45 text-center">
+            <div className="pagination-area pb-45 text-center mt-15">
                 <div className="container">
                     <div className="row">
                         <div className="col-xl-12">
                             <div className="single-wrap d-flex justify-content-center">
                                 <nav aria-label="Page navigation example">
                                     <ul className="pagination justify-content-start">
-                                        {/*<li className="page-item"><a className="page-link" href="#"><span*/}
-                                        {/*    className="flaticon-arrow roted"></span></a></li>*/}
                                         {numberPage}
-                                        {/*<li className="page-item"><a className="page-link" href="#"><span*/}
-                                        {/*    className="flaticon-arrow right-arrow"></span></a></li>*/}
                                     </ul>
                                 </nav>
                             </div>
@@ -176,7 +171,7 @@ const PostItem = (params) => {
 const Tag = (data) => {
     return(
         <div className="tag-container">
-            <Link to={`${data.cate}`} style={{
+            <Link to={`/${data.cate}`} style={{
                 margin:"0 !important"
             }}><p className="tag-item">
                 {data.name}</p></Link>
