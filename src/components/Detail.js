@@ -44,16 +44,14 @@ export const FacebookComment = (props) => {
 export const LatestItem = (item) => {
     return (
         <div className="row">
-            <div className="single-bottom mb-20">
+            <div className="single-bottom mb-20" style={{marginLeft:"35px"}}>
                 <Link to={`/${item.link.substring(20, item.link.indexOf(".htm"))}`}>
                     <div className="trend-bottom-img mb-15" style={{marginTop: "5px"}}>
-                        <img src={item.img} alt="IMG"
-                            // title={data.description}
-                        ></img>
+                        <img src={item.img} alt="IMG" style={{height:"160px"}}></img>
                     </div>
                     <div className="trend-bottom-cap">
                         <span className="color1">{item.pubDate}</span>
-                        <h4>{item.title}</h4>
+                        <h4 style={{fontSize:"14px", marginRight:"75px"}}>{item.title}</h4>
                     </div>
                 </Link>
             </div>
