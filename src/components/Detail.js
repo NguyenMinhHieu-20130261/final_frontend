@@ -6,13 +6,14 @@ import {cateData} from "../category-data/cateData";
 import NewContent from "./NewContent";
 import {Comments, FacebookProvider} from "react-facebook";
 
+
 export const Breadcrumb = (props) => {
     return (
         <div className="row">
             <div className="col-lg-12">
                 <div className="trending-tittle">
                     <div className="trending-animated" style={{display: "flex"}}>
-                        <Link to={'/home'} className="item home" style={{color: "black"}}>Trang chủ</Link>
+                        <Link to={'/'} className="item home" style={{color: "black"}}>Trang chủ</Link>
                         <span style={{margin: "0 10px 0 10px"}}> > </span>
                         <Link to={`/${props.cate}`}
                               className="item cate"

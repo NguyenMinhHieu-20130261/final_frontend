@@ -2,21 +2,10 @@ import React from 'react';
 import logo from "./icon/logo.png"
 import {cateData} from "../../category-data/cateData";
 import {Link} from "react-router-dom";
+import {SearchBar} from "./SearchBar";
 const OtherCates = (data) => {
     return (
         <li><Link to={`${data.cate}`}>{data.name}</Link></li>
-    )
-}
-const SearchBar = () => {
-    return(
-        <div className="col-xl-2 col-lg-2 col-md-4">
-            <div className="header-right-btn ">
-                <i className="fas fa-search magnify"></i>
-                <form>
-                    <input  className="search-bar" type="text" name="search" placeholder="Tìm kiếm"/>
-                </form>
-            </div>
-        </div>
     )
 }
 const Header = () => {
@@ -29,7 +18,7 @@ const Header = () => {
                             <div className="row d-flex align-items-center">
                                 <div className="col-xl-12 col-lg-12 col-md-12">
                                     <div className="header-banner f-right ">
-                                        <Link to={"/home"}><img src={logo} alt="LOGO" style={{borderRadius:"20px"}}></img></Link>
+                                        <Link to={"/"}><img src={logo} alt="LOGO" style={{borderRadius:"20px"}}></img></Link>
                                     </div>
                                 </div>
                             </div>
@@ -41,15 +30,13 @@ const Header = () => {
                                 <div className="col-xl-10 col-lg-10 col-md-12 header-flex">
 
                                     <div className="sticky-logo">
-                                        <a href="index.html">
-
-                                        </a>
+                                        <Link to={"/"}></Link>
                                     </div>
 
                                     <div className="main-menu d-none d-md-block">
                                         <nav>
                                             <ul id="navigation">
-                                                <li><Link to={"/home"}>Trang Chủ</Link></li>
+                                                <li><Link to={"/"}>Trang Chủ</Link></li>
                                                 <li><Link to={"/tin-moi-nhat"}>Tin mới nhất</Link></li>
                                                 <li><Link to={"/thoi-su"}>Trong nước</Link></li>
                                                 <li><Link to={"/thoi-su-quoc-te"}>Quốc Tế</Link></li>
@@ -61,8 +48,8 @@ const Header = () => {
                                                         {cateData.slice(5, cateData.length).map(cate =>
                                                             <OtherCates cate={cate.cate} name={cate.name}/>
                                                         )}
-                                                        <li><a href="about.html">Về chúng tôi</a></li>
-                                                        <li><a href="contact.html">Liên hệ chúng tôi</a></li>
+                                                        <li><Link to={"/"}>Về chúng tôi</Link></li>
+                                                        <li><Link to={"/"}>Liên hệ chúng tôi</Link></li>
                                                     </ul>
                                                 </li>
                                                 <li><Link to={"/history"}><i className="fas fa-clock"></i></Link></li>

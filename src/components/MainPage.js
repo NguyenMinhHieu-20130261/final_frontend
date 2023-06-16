@@ -3,6 +3,53 @@ import {cateData} from "../category-data/cateData";
 import {Link} from "react-router-dom";
 import {RssPage} from "../RSS/rss.js";
 
+function historyPost(item) {
+    let list = JSON.parse(localStorage.getItem("history"))
+    if (!list) {
+        list = []
+    }
+    if (!list.find(obj => obj.title === item.title && obj.desc === item.desc
+        && obj.pubDate === item.pubDate && obj.img === item.img
+        && obj.link === item.link)) {
+        list.push(item)
+    } else {
+        const filteredList = list.filter(obj => !(obj.title === item.title && obj.desc === item.desc
+            && obj.pubDate === item.pubDate && obj.img === item.img
+            && obj.link === item.link));
+        filteredList.reverse();
+        filteredList.push(item);
+        list = filteredList;
+    }
+    list.reverse()
+    localStorage.setItem("history", JSON.stringify(list))
+}
+
+let listSaved = JSON.parse(localStorage.getItem("saved-post"))
+if (!listSaved) {
+    listSaved = []
+}
+const checkSavedPost = (item) => {
+    return listSaved.find(obj => obj.title === item.title && obj.desc === item.desc
+        && obj.pubDate === item.pubDate && obj.img === item.img
+        && obj.link === item.link)
+}
+
+function savedPost(item) {
+    if (!listSaved.find(obj => obj.title === item.title && obj.desc === item.desc
+        && obj.pubDate === item.pubDate && obj.img === item.img
+        && obj.link === item.link)) {
+        listSaved.push(item)
+    } else {
+        const filteredList = listSaved.filter(obj => !(obj.title === item.title && obj.desc === item.desc
+            && obj.pubDate === item.pubDate && obj.img === item.img
+            && obj.link === item.link));
+        filteredList.reverse();
+        listSaved = filteredList
+    }
+    listSaved.reverse()
+    localStorage.setItem("saved-post", JSON.stringify(listSaved))
+    window.location.reload()
+}
 const Trending = (data) => {
     const [itemContent, setItem] = useState(data)
     const list = RssPage(itemContent.cate)
@@ -25,6 +72,7 @@ const Trending = (data) => {
                                   {list.slice(1, 4)
                                       .map(item => <SidePostTrending
                                           title={item.title}
+                                          key={item.title}
                                           img={item.img}
                                           pubDate={item.pubDate}
                                           link={item.link}
@@ -62,15 +110,35 @@ const SidePostTrending = (data) => {
     return(
         <div className="col-lg-4">
             <div className="single-bottom mb-20">
-                <Link to={"/"+ data.link.substring(20,data.link.indexOf(".htm"))}>
+                <Link to={"/"+ data.link.substring(20,data.link.indexOf(".htm"))} key={"sideTrending" + data.title}>
                     <div className="trend-bottom-img mb-15" style={{marginTop: "5px"}}>
-                        <img src={data.img} alt="IMG"
-                             // title={data.description}
-                        ></img>
+                        <img src={data.img} alt="IMG"></img>
                     </div>
                     <div className="trend-bottom-cap">
                         <span className="color1">{data.pubDate}</span>
-                        <h4>{data.title}</h4>
+                        <button className={`ml-10 border-0 bg-white 
+                    ${checkSavedPost({
+                            title: data.title, desc: data.desc,
+                            pubDate: data.pubDate, link: data.link, img: data.img
+                        }) ? `text-warning` : ``}`}
+                                type="reset"
+                                onClick={() => {
+                                    savedPost({
+                                        title: data.title, desc: data.desc,
+                                        pubDate: data.pubDate, link: data.link, img: data.img
+                                    })
+                                }}><i className="fas fa-bookmark"></i></button>
+                        <h4>
+                            <Link to={`/${data.link.substring(20, data.link.indexOf(".htm"))}`}
+                                  key={"SearchItem" + data.title}
+                                  onClick={() => {
+                                      historyPost({
+                                          title: data.title, desc: data.desc,
+                                          pubDate: data.pubDate, link: data.link, img: data.img
+                                      })
+                                  }}>{data.title}
+                            </Link>
+                        </h4>
                     </div>
                 </Link>
             </div>
@@ -81,32 +149,53 @@ const Tag = (data) => {
     return(
     <div className="tag-container">
         <Link to={`${data.cate}`} style={{
-            margin:"0 !important"
-        }}><p className="tag-item">
+            margin:"0 !important"}}
+              key={"cateTag "+ data.name}><p className="tag-item">
             {data.name}</p></Link>
     </div>
     )
 }
 const LatestPost = (data) => {
-  return(
+    return(
       <div className="col-lg-6 col-md-6">
           <div className="single-what-news mb-40">
-              <Link to={"/"+ data.link.substring(20,data.link.indexOf(".htm"))}>
+              <Link to={"/"+ data.link.substring(20,data.link.indexOf(".htm"))} key={"latestPostItem" + data.title}>
                   <div className="what-img">
                       <img src={data.img}></img>
                   </div>
-                  <div className="">
-                      <span className="">{data.pubDate}</span>
-                      <h4><a href="#">{data.title}</a></h4>
+                  <div className="what-cap">
+                      <span className="color-1">{data.pubDate}</span>
+                      <button className={`ml-10 border-0 bg-white 
+                    ${checkSavedPost({
+                          title: data.title, desc: data.desc,
+                          pubDate: data.pubDate, link: data.link, img: data.img
+                      }) ? `text-warning` : ``}`}
+                              type="reset"
+                              onClick={() => {
+                                  savedPost({
+                                      title: data.title, desc: data.desc,
+                                      pubDate: data.pubDate, link: data.link, img: data.img
+                                  })
+                              }}><i className="fas fa-bookmark"></i></button>
+                      <h4>
+                          <Link to={`/${data.link.substring(20, data.link.indexOf(".htm"))}`}
+                                key={"SearchItem" + data.title}
+                                onClick={() => {
+                                    historyPost({
+                                        title: data.title, desc: data.desc,
+                                        pubDate: data.pubDate, link: data.link, img: data.img
+                                    })
+                                }}>{data.title}
+                          </Link>
+                      </h4>
                   </div>
               </Link>
           </div>
       </div>
   )
 }
-const latest = "tin-moi-nhat.rss";
 const Latest = () => {
-    const [itemContent, setItem] = useState(latest)
+    const [itemContent, setItem] = useState( "tin-moi-nhat")
     const list = RssPage(itemContent.cate)
     if (list.length < 1) {
         return (<div>Error</div>)
@@ -165,7 +254,8 @@ const Latest = () => {
                                                       pubDate={item.pubDate}
                                                       link={item.link}
                                                       cate={itemContent.cate}
-                                                      description={item.description}/>)}
+                                                      key={item.title}
+                                                      />)}
                                           </div>
                                       </div>
                                   </div>
@@ -179,10 +269,9 @@ const Latest = () => {
                           <h3>Danh mục</h3>
                       </div>
                       <div className="mb-20 d-flex"
-                      style={{flexWrap :"wrap"}}
-                      >
+                      style={{flexWrap :"wrap"}}>
                           {cateData.slice(5, cateData.length).map(cate =>
-                              <Tag cate={cate.cate} name={cate.name}/>
+                              <Tag key={cate.name} cate={cate.cate} name={cate.name}/>
                           )}
                       </div>
                       <div className="news-poster d-none d-lg-block">
@@ -198,15 +287,36 @@ const CatePostItem = (data) => {
   return (
       <div className="col-lg-4">
           <div className="single-bottom mb-35">
-              <Link to={"/"+ data.link.substring(20,data.link.indexOf(".htm"))}>
+              <Link to={"/"+ data.link.substring(20,data.link.indexOf(".htm"))} key={"catePostItem" + data.title}>
                   <div className="trend-bottom-img mb-30">
-                      <img src={data.img} alt="IMG"
-                          // title={data.description}
-                      ></img>
+                      <img src={data.img} alt="IMG"/>
                   </div>
                   <div className="trend-bottom-cap">
                       <span className="color1">{data.pubDate}</span>
-                      <h4>{data.title}</h4>
+                      <button className={`ml-10 border-0 bg-white 
+                    ${checkSavedPost({
+                          title: data.title, desc: data.desc,
+                          pubDate: data.pubDate, link: data.link, img: data.img
+                      }) ? `text-warning` : ``}`}
+                              type="reset"
+                              onClick={() => {
+                                  savedPost({
+                                      title: data.title, desc: data.desc,
+                                      pubDate: data.pubDate, link: data.link, img: data.img
+                                  })
+                              }}><i className="fas fa-bookmark"></i></button>
+                      <h4>
+                          <Link to={`/${data.link.substring(20, data.link.indexOf(".htm"))}`}
+                                key={"SearchItem" + data.title}
+                                onClick={() => {
+                                    historyPost({
+                                        title: data.title, desc: data.desc,
+                                        pubDate: data.pubDate, link: data.link, img: data.img
+                                    })
+                                }}>
+                              {data.title}
+                          </Link>
+                      </h4>
                   </div>
               </Link>
           </div>
@@ -220,7 +330,7 @@ const CatePost = (data) => {
         return (<div>Lỗi cate</div>)
     }
   return(
-    <div className="trending-area fix">
+    <div className="trending-area fix" key={"catePost" + data.cate}>
         <div className="container">
             <div className="trending-main">
                 <div className="row">
@@ -238,6 +348,7 @@ const CatePost = (data) => {
                                     .map(item => <CatePostItem
                                         title={item.title}
                                         img={item.img}
+                                        key ={item.title}
                                         pubDate={item.pubDate}
                                         link={item.link}
                                         cate={itemContent.cate}
@@ -252,12 +363,12 @@ const CatePost = (data) => {
   )
 }
 export const Home = () => {
-  return(
+    return(
       <div id="main-page"
       style={{marginTop:"25px"}}>
           <Trending/>
           <Latest/>
-          {cateData.slice(1, 4).map(item => <CatePost cate={item.cate} name={item.name} />)}
+          {cateData.slice(1, 4).map(item => <CatePost key={item.cate} cate={item.cate} name={item.name} />)}
       </div>
   )
 }

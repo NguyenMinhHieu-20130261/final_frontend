@@ -6642,6 +6642,16 @@ b, sup, sub, u, del {
 .bg-twitter {
     background-color: #1da1f2;
 }
+.single-bottom {
+    margin-left: 35px;
+}
+.single-bottom img {
+    height: 160px;
+}
+.single-bottom h4 {
+    font-size: 14px;
+    margin-right: 75px;
+}
 .single-bottom .color1 {
     font-size: 12px;
     margin-bottom: 5px;

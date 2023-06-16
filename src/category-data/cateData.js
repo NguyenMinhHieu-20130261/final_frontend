@@ -9,5 +9,15 @@ export const cateData = [
     {name: "Văn Nghệ", cate: "van-nghe", id: 8},
     {name: "Giải Trí", cate: "giai-tri", id: 9},
     {name: "Thể Thao", cate: "the-thao", id: 10},
-    {name: "Công nghệ", cate: "cong-nghe", id: 11}
+    {name: "Công nghệ", cate: "cong-nghe", id: 11},
+    {name: "Công đoàn", cate: "cong-doan", id: 12},
+    {name: "Chính Trị", cate: "chinh-tri", id: 13},
+    {name: "Bạn đọc", cate: "ban-doc", id: 14},
+    {name: "Nói thẳng", cate: "noi-thang", id: 15},
+    {name: "Lý tưởng sống", cate: "ly-tuong-song", id: 16},
+    {name: "Du lịch xanh", cate: "du-lich-xanh", id: 17},
+    {name: "Tin độc quyền", cate: "tin-doc-quyen", id: 18},
+    {name: "Địa ốc", cate: "dia-oc", id: 19},
+    {name: "Thị trường", cate: "thi-truong", id: 20},
+
 ]
