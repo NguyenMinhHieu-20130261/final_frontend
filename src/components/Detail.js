@@ -13,7 +13,7 @@ export const Breadcrumb = (props) => {
             <div className="col-lg-12">
                 <div className="trending-tittle">
                     <div className="trending-animated" style={{display: "flex"}}>
-                        <Link to={'/home'} className="item home" style={{color: "black"}}>Trang chủ</Link>
+                        <Link to={'/'} className="item home" style={{color: "black"}}>Trang chủ</Link>
                         <span style={{margin: "0 10px 0 10px"}}> > </span>
                         <Link to={`/${props.cate}`}
                               className="item cate"
