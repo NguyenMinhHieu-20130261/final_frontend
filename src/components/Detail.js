@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {RssDetails, RssPage} from "../RSS/rss";
 import {Link, useLoaderData} from "react-router-dom";
 import {useMemo} from "react";
@@ -16,9 +16,10 @@ export const Breadcrumb = (props) => {
                         <Link to={'/home'} className="item home" style={{color: "black"}}>Trang chủ</Link>
                         <span style={{margin: "0 10px 0 10px"}}> > </span>
                         <Link to={`/${props.cate}`}
-                              className="item cate" style={{color: "black"}}> {cateData.find(item => item.cate === props.cate).name}</Link>
+                              className="item cate"
+                              style={{color: "black"}}> {cateData.find(item => item.cate === props.cate).name}</Link>
                         <span style={{margin: "0 10px 0 10px"}}> > </span>
-                        <span className="item title" > {props.title}</span>
+                        <span className="item title"> {props.title}</span>
                     </div>
 
                 </div>
@@ -28,8 +29,8 @@ export const Breadcrumb = (props) => {
 }
 export const MainContent = (props) => {
     return (<div className="col-lg-8">
-            <NewContent post={props.post} cate={props.cate}/>
-            <FacebookComment link={props.link}></FacebookComment>
+        <NewContent post={props.post} cate={props.cate}/>
+        <FacebookComment link={props.link}></FacebookComment>
     </div>)
 }
 export const FacebookComment = (props) => {
@@ -40,179 +41,66 @@ export const FacebookComment = (props) => {
         </FacebookProvider>
     );
 }
-
-export const PopularPosts = () => {
-    return (<div className="p-b-30">
-        <div className="how2 how2-cl4 flex-s-c">
-            <h3 className="f1-m-2 cl3 tab01-title">
-                Popular Post
-            </h3>
-        </div>
-
-        <ul className="p-t-35">
-            <li className="flex-wr-sb-s p-b-30">
-                <a href="#" className="size-w-10 wrap-pic-w hov1 trans-03">
-                    <img src="images/popular-post-04.jpg" alt="IMG"/>
-                </a>
-
-                <div className="size-w-11">
-                    <h6 className="p-b-4">
-                        <a href="blog-detail-02.html" className="f1-s-5 cl3 hov-cl10 trans-03">
-                            Donec metus orci, malesuada et lectus vitae
-                        </a>
-                    </h6>
-
-                    <span className="cl8 txt-center p-b-24">
-											<a href="#" className="f1-s-6 cl8 hov-cl10 trans-03">
-												Music
-											</a>
-
-											<span className="f1-s-3 m-rl-3">
-												-
-											</span>
-
-											<span className="f1-s-3">
-												Feb 18
-											</span>
-										</span>
-                </div>
-            </li>
-
-            <li className="flex-wr-sb-s p-b-30">
-                <a href="#" className="size-w-10 wrap-pic-w hov1 trans-03">
-                    <img src="images/popular-post-05.jpg" alt="IMG"/>
-                </a>
-
-                <div className="size-w-11">
-                    <h6 className="p-b-4">
-                        <a href="blog-detail-02.html" className="f1-s-5 cl3 hov-cl10 trans-03">
-                            Donec metus orci, malesuada et lectus vitae
-                        </a>
-                    </h6>
-
-                    <span className="cl8 txt-center p-b-24">
-											<a href="#" className="f1-s-6 cl8 hov-cl10 trans-03">
-												Game
-											</a>
-
-											<span className="f1-s-3 m-rl-3">
-												-
-											</span>
-
-											<span className="f1-s-3">
-												Feb 16
-											</span>
-										</span>
-                </div>
-            </li>
-
-            <li className="flex-wr-sb-s p-b-30">
-                <a href="#" className="size-w-10 wrap-pic-w hov1 trans-03">
-                    <img src="images/popular-post-06.jpg" alt="IMG"/>
-                </a>
-
-                <div className="size-w-11">
-                    <h6 className="p-b-4">
-                        <a href="blog-detail-02.html" className="f1-s-5 cl3 hov-cl10 trans-03">
-                            Donec metus orci, malesuada et lectus vitae
-                        </a>
-                    </h6>
-
-                    <span className="cl8 txt-center p-b-24">
-											<a href="#" className="f1-s-6 cl8 hov-cl10 trans-03">
-												Celebrity
-											</a>
-
-											<span className="f1-s-3 m-rl-3">
-												-
-											</span>
-
-											<span className="f1-s-3">
-												Feb 12
-											</span>
-										</span>
-                </div>
-            </li>
-        </ul>
-    </div>)
-}
-
-export const FollowTitle = () => {
+export const LatestItem = (item) => {
     return (
-        <div className="section-tittle mb-40">
-            <h3>Follow Us</h3>
-        </div>
-    )
-}
-export const FollowSocial = () => {
-    return (
-        <div className="single-follow mb-45">
-            <div className="single-box">
-                <div className="follow-us d-flex align-items-center">
-                    <div className="follow-social">
-                        <a href="#"><img src="src/components/assets/img/news/icon-fb.png" alt=""/></a>
+        <div className="row">
+            <div className="single-bottom mb-20">
+                <Link to={`/${item.link.substring(20, item.link.indexOf(".htm"))}`}>
+                    <div className="trend-bottom-img mb-15" style={{marginTop: "5px"}}>
+                        <img src={item.img} alt="IMG"
+                            // title={data.description}
+                        ></img>
                     </div>
-                    <div className="follow-count">
-                        <span>8,045</span>
-                        <p>Fans</p>
+                    <div className="trend-bottom-cap">
+                        <span className="color1">{item.pubDate}</span>
+                        <h4>{item.title}</h4>
                     </div>
-                </div>
-                <div className="follow-us d-flex align-items-center">
-                    <div className="follow-social">
-                        <a href="#"><img src="src/components/assets/img/news/icon-tw.png" alt=""/></a>
-                    </div>
-                    <div className="follow-count">
-                        <span>8,045</span>
-                        <p>Fans</p>
-                    </div>
-                </div>
-                <div className="follow-us d-flex align-items-center">
-                    <div className="follow-social">
-                        <a href="#"><img src="src/components/assets/img/news/icon-ins.png" alt=""/></a>
-                    </div>
-                    <div className="follow-count">
-                        <span>8,045</span>
-                        <p>Fans</p>
-                    </div>
-                </div>
-                <div className="follow-us d-flex align-items-center">
-                    <div className="follow-social">
-                        <a href="#"><img src="src/components/assets/img/news/icon-yo.png" alt=""/></a>
-                    </div>
-                    <div className="follow-count">
-                        <span>8,045</span>
-                        <p>Fans</p>
-                    </div>
-                </div>
+                </Link>
             </div>
         </div>
     )
 }
-
-export const Banner = () => {
+const latest = "tin-moi-nhat.rss";
+export const LatestPost = () => {
+    const [itemContent, setItem] = useState(latest)
+    const list = RssPage("tin-moi-nhat")
+    if (list.length < 1) {
+        return (<div>Hiện chưa có tin nào"</div>)
+    }
     return (
-        <div className="news-poster d-none d-lg-block">
-            <img src="assets/img/news/news_card.jpg" alt=""/>
+        <div className="p-b-30">
+            <div className="how2 how2-cl4 flex-s-c">
+                <h3 className="f1-m-2 cl3 tab01-title">
+                    Tin mới nhất
+                </h3>
+            </div>
+
+            <ul className="row">
+                {list.slice(0, 4).map(item => <LatestItem title={item.title}
+                                                          img={item.img}
+                                                          pubDate={item.pubDate}
+                                                          link={item.link}
+                                                          cate={itemContent.cate}
+                                                          description={item.description}/>)}
+            </ul>
         </div>
     )
 }
+
 export const Sidebar = () => {
     return (
         <div className="col-lg-4">
-            <FollowTitle></FollowTitle>
-            <FollowSocial></FollowSocial>
-            <Banner></Banner>
-            <PopularPosts></PopularPosts>
+            <LatestPost></LatestPost>
         </div>
     )
 }
 
 export const Content = (props) => {
     return (
-            <div className="row">
-                <MainContent link={props.link} post={props.post} cate={props.cate}></MainContent>
-                <Sidebar></Sidebar>
-            </div>
+        <div className="row">
+            <MainContent link={props.link} post={props.post} cate={props.cate}></MainContent>
+            <Sidebar></Sidebar>
+        </div>
     )
 }
 
