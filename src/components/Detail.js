@@ -5,7 +5,7 @@ import {useMemo} from "react";
 import {cateData} from "../category-data/cateData";
 import NewContent from "./NewContent";
 import {Comments, FacebookProvider} from "react-facebook";
-
+import {BackToTop} from "./layout/BackToTop";
 
 export const Breadcrumb = (props) => {
     return (
@@ -121,6 +121,7 @@ export function Detail() {
                         <h4 style={{textAlign: "center", marginBottom: "50px", marginTop: "50px"}}> Đang hiển thị chi
                             tiết... </h4>)}
                 </div>
+                <BackToTop/>
             </div>
         </div>
 
