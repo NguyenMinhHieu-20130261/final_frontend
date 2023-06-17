@@ -68,7 +68,7 @@ export const SearchBar = (data) => {
         setSearchText("");
     }
     return(
-        <div className="col-xl-2 col-lg-2 col-md-4">
+        <div className="col-xl-2 col-lg-3 col-md-4">
             <div className="header-right-btn ">
                 <Link to={`/search?search=${encodedSearchText}`}>
                     <i className="fas fa-search magnify" onClick={() => saveSearch()}></i>

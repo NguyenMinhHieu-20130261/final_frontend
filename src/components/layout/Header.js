@@ -27,7 +27,7 @@ const Header = () => {
                     <div className="header-bottom header-sticky">
                         <div className="container">
                             <div className="row align-items-center">
-                                <div className="col-xl-10 col-lg-10 col-md-12 header-flex">
+                                <div className="col-xl-10 col-lg-9 col-md-12 header-flex">
 
                                     <div className="sticky-logo">
                                         <Link to={"/"}></Link>

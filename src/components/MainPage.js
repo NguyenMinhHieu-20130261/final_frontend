@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {cateData} from "../category-data/cateData";
 import {Link} from "react-router-dom";
 import {RssPage} from "../RSS/rss.js";
+import {BackToTop} from "./layout/BackToTop";
 
 function historyPost(item) {
     let list = JSON.parse(localStorage.getItem("history"))
@@ -349,6 +350,7 @@ export const Home = () => {
           <Trending/>
           <Latest/>
           {cateData.slice(1, 4).map(item => <CatePost key={item.cate} cate={item.cate} name={item.name} />)}
+          <BackToTop/>
       </div>
   )
 }
