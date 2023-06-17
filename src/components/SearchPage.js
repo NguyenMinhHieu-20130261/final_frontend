@@ -109,18 +109,25 @@ const ListSearch = (params) => {
     )
 }
 export const Search = (data) => {
+    const [selectOrder, setSelectOrder] = useState("1");
+    const [filterListPost, setFilterListPost] = useState(null);
     const [cate, setCate] = useState(data);
     const [searchList , setSearchList] =useState(null)
     const list = RssPage(cate.cate)
     let searchIndex =  localStorage.getItem("search");
     useEffect(() => {
         if (list && searchIndex.trim() !== "") {
-            let filteredResult = list.filter(item => item.title.toUpperCase().indexOf(searchIndex.toUpperCase()) !== -1);
+            let filteredResult = list.filter(item => item.title.toUpperCase().indexOf(searchIndex.toUpperCase()) !== -1).sort((a ,b) => {
+                return selectOrder === "2" ? new Date(a.pubDate) - new Date(b.pubDate) : new Date(b.pubDate) - new Date(a.pubDate);
+            });
             setSearchList(filteredResult);
         } else {
             setSearchList(null);
         }
-        }, [list,searchIndex]);
+        }, [list,searchIndex ,selectOrder]);
+    const changeOrder = (event) => {
+        setSelectOrder(event.target.value);
+    };
     return (
         <div>
             <section className="whats-news-area pt-50 pb-20">
@@ -136,6 +143,13 @@ export const Search = (data) => {
                                         <h3>Kết quả tìm kiếm: {searchIndex}</h3>
                                     </div>
                                 </div>
+                                <select className="order-select"
+                                        onChange={changeOrder}
+                                        defaultValue={"1"}
+                                >
+                                    <option className="select-option" value="1" >Mới nhất</option>
+                                    <option className="select-option" value="2" >Cũ nhất</option>
+                                </select>
                             </div>
                             {searchList ? <ListSearch list={searchList} key={data.title} cate={cate.cate} name={cate.name}/> : <div> Lỗi</div>}
                         </div>
@@ -145,14 +159,3 @@ export const Search = (data) => {
         </div>
     )
 }
-// export const Search = () => {
-//     return (<div>
-//             <section className="whats-news-area pt-50 pb-20">
-//                 <div className="container">
-//                     <div className="row">
-//                         <SearchBody cate={cate.cate} name={cate.name}/>
-//                     </div>
-//                 </div>
-//             </section>
-//         </div>)
-// }

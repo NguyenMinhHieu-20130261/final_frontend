@@ -43,7 +43,10 @@ const Header = () => {
                                                 <li><Link to={"/kinh-te"}>Kinh tế</Link></li>
                                                 <li><Link to={"/suc-khoe"}>Sức Khỏe</Link></li>
 
-                                                <li><p>Khác</p>
+                                                <li><p
+                                                style={{
+                                                    cursor:"pointer"
+                                                }}>Khác</p>
                                                     <ul className="submenu">
                                                         {cateData.slice(5, cateData.length).map(cate =>
                                                             <OtherCates key={cate.name} cate={cate.cate} name={cate.name}/>

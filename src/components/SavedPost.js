@@ -3,6 +3,8 @@ import {Link} from "react-router-dom";
 import {cateData} from "../category-data/cateData";
 
 const PostLeft = (params) => {
+    const [selectOrder, setSelectOrder] = useState("1");
+    const [filterListPost, setFilterListPost] = useState(null);
     const listPost = params.list
     const [currentPage, setCurrentPage] = useState(1)
     const [listPostOnePage, setListPostOnePage] = useState(null)
@@ -12,12 +14,18 @@ const PostLeft = (params) => {
 
     useEffect(() => {
         if (listPost) {
+            let filter = listPost.sort((a, b) => {
+                return selectOrder === "2" ? new Date(a.pubDate) - new Date(b.pubDate) : new Date(b.pubDate) - new Date(a.pubDate);
+            });
+            setFilterListPost(filter);
+            console.log("filter: "+ filterListPost);
             let start = (currentPage - 1) * postNumber;
             let end = start + postNumber;
-            let post = listPost.slice(start, end)
+            let post = filter.slice(start, end)
             setListPostOnePage(post);
+            console.log("result: "+ listPostOnePage)
         }
-    }, [listPost, currentPage])
+    }, [listPost, currentPage,selectOrder])
 
     function nextPage(page) {
         setCurrentPage(page)
@@ -31,9 +39,25 @@ const PostLeft = (params) => {
             }}>{page}</p>
         </li>)
     }
+    const changeOrder = (event) => {
+        setSelectOrder(event.target.value);
+    };
     return (
         <div className="col-lg-8">
-            <ListCategory/>
+            <div className="row d-flex justify-content-between">
+                <div className="col-lg-4 col-md-3">
+                    <div className="section-tittle mb-30">
+                        <h3>Bài Viết Đã Lưu</h3>
+                    </div>
+                </div>
+                <select className="order-select"
+                        onChange={changeOrder}
+                        defaultValue={"1"}
+                >
+                    <option className="select-option" value="1" >Mới nhất</option>
+                    <option className="select-option" value="2" >Cũ nhất</option>
+                </select>
+            </div>
             {listPostOnePage ? <ListPost list={listPostOnePage}/> : <div></div>}
             <div className="pagination-area pb-45 text-center">
                 <div className="container">
@@ -48,17 +72,6 @@ const PostLeft = (params) => {
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    )
-}
-const ListCategory = () => {
-    return (
-        <div className="row d-flex justify-content-between">
-            <div className="col-lg-3 col-md-3">
-                <div className="section-tittle mb-30">
-                    <h3>Bài Viết Đã Lưu</h3>
                 </div>
             </div>
         </div>

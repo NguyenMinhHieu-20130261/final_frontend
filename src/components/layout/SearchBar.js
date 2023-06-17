@@ -13,7 +13,7 @@ const ErrorResult = () => {
     return (
         <ul className="search-list d-flex" style={{position:"absolute",flexWrap :"nowrap", margin: "0 !important"}}>
             <li>
-                <div className="search-item "style={{border:"1px solid black", backgroundColor:"white",width:"205px"}}>
+                <div className="search-item "   style={{border:"1px solid black", backgroundColor:"white",width:"205px"}}>
                     <p style={{ textAlign: "left",margin:"10px 5px"}}>Không có tin nào trong danh mục này !</p>
                 </div>
             </li>
@@ -23,13 +23,15 @@ const ErrorResult = () => {
 const ResultItem = (result) => {
     return (
         <li className="result-search">
-            <Link to={"/"+ result.link.substring(20,result.link.indexOf(".htm"))} style={{padding: "0 !important"}} key={"resultItem" + result.title}>
-                <div className="search-item"
-                     style={{border:"1px solid black", backgroundColor:"white",width:"205px"}}>
-                    <div style={{}}><p>{result.title}</p></div>
-                    <div style={{}}><p>{result.pubDate}</p></div>
-                </div>
-            </Link>
+            <div className="search-item">
+                <Link to={"/"+ result.link.substring(20,result.link.indexOf(".htm"))} style={{padding: "0 !important"}} key={"resultItem" + result.title}>
+                    <p className={"result-search-text"}>
+                        {result.title}
+                        <br/>
+                        {result.pubDate}
+                    </p>
+                </Link>
+            </div>
         </li>
     )
 }
@@ -73,6 +75,7 @@ export const SearchBar = (data) => {
                 </Link>
                 <form>
                     <input
+                        style={{width:"220px"}}
                         onChange={(e) =>{
                             setSearchText(e.target.value);
                         }}
