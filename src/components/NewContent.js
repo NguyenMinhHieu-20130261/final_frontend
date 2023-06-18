@@ -56,6 +56,7 @@ function FacebookShare() {
     const handleFbShare = () => {
         // Lấy url của tin tức muốn chia sẻ
         const urlToShare = "https://nld.com.vn" + sessionStorage.getItem("link");
+        // const urlToShare = "https://nld-frontend.web.app" + sessionStorage.getItem("link");
         const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(urlToShare)}`;
         window.open(facebookShareUrl, '_blank');
     };
@@ -74,6 +75,7 @@ function TwitterShare() {
     const ShareTwitterButton = () => {
         // Lấy URL của tin tức muốn chia sẻ
         const urlToShare = "https://nld.com.vn" + sessionStorage.getItem("link");
+        // const urlToShare = "https://nld-frontend.web.app" + sessionStorage.getItem("link");
         const twitterShareUrl = `https://twitter.com/share?url=${encodeURIComponent(urlToShare)}`;
         window.open(twitterShareUrl, '_blank');
     };

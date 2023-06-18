@@ -20,6 +20,7 @@ const Speech = (data) => {
             synth.resume();
         else {
             speech.voice = voices[301];
+            // speech.voice = voices[305];
             synth.speak(speech);
         }
         setIsPaused(false);
@@ -34,13 +35,13 @@ const Speech = (data) => {
     };
 
     return (
-        <div className={"container-speech"}>
+        <div className={"container-speech"} style={{marginLeft:"-50px"}}>
             <div className={"btn-container d-flex justify-content-sm-around"}>
                 <span style={{color: "green", fontWeight:"bold", fontSize:"18px"}}>Báo đọc</span>
-                <button onClick={handlePlay}>{!isPaused ? <i className={"fa fa-play"}></i> :
-                    <i className={"fa fa-angle-double-right"}></i>}</button>
-                <button onClick={handlePause}><i className={"fa fa-pause"}></i></button>
-                <button onClick={handleStop}><i className={"fa fa-stop"}></i></button>
+                <button style={{width:"76px", height:"40px", background:"#6ae96a"}} onClick={handlePlay}>{!isPaused ? <p>Đọc</p> :
+                    <p>Tiếp tục</p>}</button>
+                <button style={{width:"85px", height:"40px", background:"#6ae96a"}} onClick={handlePause}><p>Tạm dừng</p></button>
+                <button style={{width:"76px", height:"40px", background:"#6ae96a"}} onClick={handleStop}><p>Dừng lại</p></button>
             </div>
         </div>
     );
