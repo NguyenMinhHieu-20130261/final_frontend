@@ -43,15 +43,15 @@ export const FacebookComment = (props) => {
 }
 export const LatestItem = (item) => {
     return (
-        <div className="row"  key={"LatestItem" + item.title}>
-            <div className="single-bottom mb-20" style={{marginLeft:"35px"}}>
+        <div className="row" key={"LatestItem" + item.title}>
+            <div className="single-bottom mb-20" style={{marginLeft: "35px"}}>
                 <Link to={`/${item.link.substring(20, item.link.indexOf(".htm"))}`}>
                     <div className="trend-bottom-img mb-15" style={{marginTop: "5px"}}>
-                        <img src={item.img} alt="IMG" style={{height:"160px"}}></img>
+                        <img src={item.img} alt="IMG" style={{height: "160px"}}></img>
                     </div>
                     <div className="trend-bottom-cap">
                         <span className="color1">{item.pubDate}</span>
-                        <h4 style={{fontSize:"14px", marginRight:"75px"}}>{item.title}</h4>
+                        <h4 style={{fontSize: "14px", marginRight: "75px"}}>{item.title}</h4>
                     </div>
                 </Link>
             </div>
@@ -67,12 +67,9 @@ export const LatestPost = () => {
     }
     return (
         <div className="p-b-30">
-            <div className="how2 how2-cl4 flex-s-c">
-                <h3 className="f1-m-2 cl3 tab01-title">
-                    Tin mới nhất
-                </h3>
-            </div>
-
+            <h3 className="f1-m-2 cl3 tab01-title">
+                Tin mới nhất
+            </h3>
             <ul className="row">
                 {list.slice(0, 4).map(item => <LatestItem
                     title={item.title}
