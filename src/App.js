@@ -13,6 +13,8 @@ import './components/assets/css/slick.css';
 import './components/assets/css/nice-select.css';
 import './components/assets/css/style.css';
 import './components/assets/css/responsive.css';
+import './components/assets/layout/main-page.css';
+import './components/assets/layout/header.css';
 import './components/assets/img/news/icon-fb.png'
 import './components/assets/img/news/icon-tw.png'
 import './components/assets/img/news/icon-ins.png'
