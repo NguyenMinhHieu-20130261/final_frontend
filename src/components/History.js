@@ -114,6 +114,7 @@ const PostItem = (params) => {
         if (!list.find(obj => obj.title === item.title && obj.desc === item.desc
             && obj.pubDate === item.pubDate && obj.img === item.img
             && obj.link === item.link)) {
+            list.reverse();
             list.push(item)
         } else {
             const filteredList = list.filter(obj => !(obj.title === item.title && obj.desc === item.desc
@@ -141,6 +142,7 @@ const PostItem = (params) => {
         if (!listSaved.find(obj => obj.title === item.title && obj.desc === item.desc
             && obj.pubDate === item.pubDate && obj.img === item.img
             && obj.link === item.link)) {
+            listSaved.reverse()
             listSaved.push(item)
         } else {
             const filteredList = listSaved.filter(obj => !(obj.title === item.title && obj.desc === item.desc
