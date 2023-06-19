@@ -6,6 +6,7 @@ export const RssPage = (page) => {
     useEffect(() => {
         // const urltest = '/api/tin-moi-nhat.rss';
         const url = `/api/${page}.rss`;
+        // const url = `https://api.allorigins.win/raw?url=https://nld.com.vn/${page}.rss`;
         axios.get(url)
             .then(res => {
                 const xml = res.data;
@@ -43,12 +44,13 @@ export const RssDetails = (titleUrl) => {
 
     useEffect(() => {
         async function getPost() {
+            // await axios.get(`https://api.allorigins.win/raw?url=https://nld.com.vn/` + titleUrl.substring(5)).then(response => {
             await axios.get(titleUrl).then(response => {
                 const $ = cheerio.load(response.data);
-                const title = $("h1.title-content").text();
-                const date = $("p.dateandcat.clearfix").text();
-                const sapo = $("h2.sapo-detail").text();
-                const contents = $("div.content-news-detail").contents()
+                const title = $(".title-content h1").text();
+                const date = $(".clearfix .dateandcat p").text();
+                const sapo = $(".sapo-detail h2").text();
+                const contents = $(".content-news-detail div").contents()
                 const range = document.createRange();
                 const entryBodyFragment = range.createContextualFragment(contents);
                 const result = {title: title, date: date, sapo: sapo, contents: entryBodyFragment}

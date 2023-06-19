@@ -1,7 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+import {cateData} from "../category-data/cateData";
 
 const PostLeft = (params) => {
+    const [selectOrder, setSelectOrder] = useState("1");
+    const [filterListPost, setFilterListPost] = useState(null);
     const listPost = params.list
     const [currentPage, setCurrentPage] = useState(1)
     const [listPostOnePage, setListPostOnePage] = useState(null)
@@ -11,13 +14,18 @@ const PostLeft = (params) => {
 
     useEffect(() => {
         if (listPost) {
+            let filter = listPost.sort((a, b) => {
+                return selectOrder === "2" ? new Date(a.pubDate) - new Date(b.pubDate) : new Date(b.pubDate) - new Date(a.pubDate);
+            });
+            setFilterListPost(filter);
+            console.log("filter: "+ filterListPost);
             let start = (currentPage - 1) * postNumber;
             let end = start + postNumber;
-            let post = listPost.slice(start, end)
+            let post = filter.slice(start, end)
             setListPostOnePage(post);
+            console.log("result: "+ listPostOnePage)
         }
-    }, [listPost, currentPage])
-
+    }, [listPost, currentPage,selectOrder])
     function nextPage(page) {
         setCurrentPage(page)
     }
@@ -25,14 +33,30 @@ const PostLeft = (params) => {
     for (let i = 0; i < pageTotal; i++) {
         let page = i + 1
         numberPage.push(<li className="page-item active">
-            <a className="page-link" onClick={() => {
+            <p className="page-link" onClick={() => {
                 nextPage(page)
-            }}>{page}</a>
+            }}>{page}</p>
         </li>)
     }
+    const changeOrder = (event) => {
+        setSelectOrder(event.target.value);
+    };
     return (
         <div className="col-lg-8">
-            <ListCategory/>
+            <div className="row d-flex justify-content-between">
+                <div className="col-lg-4 col-md-3">
+                    <div className="section-tittle mb-30">
+                        <h3>Bài Viết Đã Đọc</h3>
+                    </div>
+                </div>
+                <select className="order-select"
+                        onChange={changeOrder}
+                        defaultValue={"1"}
+                >
+                    <option className="select-option" value="1" >Mới nhất</option>
+                    <option className="select-option" value="2" >Cũ nhất</option>
+                </select>
+            </div>
             {listPostOnePage ? <ListPost list={listPostOnePage}/> : <div></div>}
             <div className="pagination-area pb-45 text-center">
                 <div className="container">
@@ -47,17 +71,6 @@ const PostLeft = (params) => {
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    )
-}
-const ListCategory = () => {
-    return (
-        <div className="row d-flex justify-content-between">
-            <div className="col-lg-3 col-md-3">
-                <div className="section-tittle mb-30">
-                    <h3>Bài Viết Đã Đọc</h3>
                 </div>
             </div>
         </div>
@@ -175,58 +188,35 @@ const PostItem = (params) => {
         </div>
     )
 }
+const Tag = (data) => {
+    return(
+        <div className="tag-container">
+            <Link to={`/${data.cate}`} style={{
+                margin:"0 !important"
+            }}><p className="tag-item">
+                {data.name}</p></Link>
+        </div>
+    )
+}
 const PostRight = () => {
     return (
         <div className="col-lg-4">
-            <div className="section-tittle mb-40">
-                <h3>Follow Us</h3>
+            <div className="section-tittle mb-15">
+                <h3>Danh mục</h3>
             </div>
-            <div className="single-follow mb-45">
-                <div className="single-box">
-                    <div className="follow-us d-flex align-items-center">
-                        <div className="follow-social">
-                            <a href="#"><img src="assets/img/news/icon-fb.png" alt=""/></a>
-                        </div>
-                        <div className="follow-count">
-                            <span>8,045</span>
-                            <p>Fans</p>
-                        </div>
-                    </div>
-                    <div className="follow-us d-flex align-items-center">
-                        <div className="follow-social">
-                            <a href="#"><img src="assets/img/news/icon-tw.png" alt=""/></a>
-                        </div>
-                        <div className="follow-count">
-                            <span>8,045</span>
-                            <p>Fans</p>
-                        </div>
-                    </div>
-                    <div className="follow-us d-flex align-items-center">
-                        <div className="follow-social">
-                            <a href="#"><img src="assets/img/news/icon-ins.png" alt=""/></a>
-                        </div>
-                        <div className="follow-count">
-                            <span>8,045</span>
-                            <p>Fans</p>
-                        </div>
-                    </div>
-                    <div className="follow-us d-flex align-items-center">
-                        <div className="follow-social">
-                            <a href="#"><img src="assets/img/news/icon-yo.png" alt=""/></a>
-                        </div>
-                        <div className="follow-count">
-                            <span>8,045</span>
-                            <p>Fans</p>
-                        </div>
-                    </div>
-                </div>
+            <div className="mb-20 d-flex"
+                 style={{flexWrap :"wrap"}}
+            >
+                {cateData.slice(5, cateData.length).map(cate =>
+                    <Tag cate={cate.cate} name={cate.name}/>
+                )}
             </div>
             <div className="news-poster d-none d-lg-block">
                 <img src="assets/img/news/news_card.jpg" alt=""/>
             </div>
-        </div>
-    )
+        </div>    )
 }
+
 export const History = () => {
     let listHistory = JSON.parse(localStorage.getItem("history"))
     if (listHistory === null) {

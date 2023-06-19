@@ -5,6 +5,9 @@ import App from "../App";
 import {Detail, loadDetail} from "../components/Detail";
 import {History} from "../components/History";
 import {SavedPost} from "../components/SavedPost";
+import {
+    // loadSearch,
+    Search} from "../components/SearchPage";
 
 export const router = createBrowserRouter([{
     element: <App/>,
@@ -12,9 +15,6 @@ export const router = createBrowserRouter([{
     children:[
         {
             path:"",
-            element:<Home/>
-        },{
-            path:"home",
             element:<Home/>
         },
         {
@@ -31,6 +31,9 @@ export const router = createBrowserRouter([{
         }, {
             path:"saved-post",
             element:<SavedPost/>
-        }
-    ]
+        }, {
+            path:"search",
+            element:<Search/>,
+            // loader :loadSearch
+        }    ]
 }]);

@@ -16,7 +16,7 @@ function NewContent(props) {
             }
             contentRef.current.appendChild(datacontent)
             const paragraphs = contentElement.querySelectorAll('p');
-            let speakData = content.sapo + ", " + Array.from(paragraphs).map((p) => p.textContent).join(", ");
+            let speakData = content.title + ", " + content.sapo + ", " + Array.from(paragraphs).map((p) => p.textContent).join(", ");
             setSpeak(speakData)
         }
     }, [datacontent]);
@@ -24,6 +24,7 @@ function NewContent(props) {
         <Link to={`/${props.cate}`} className="text-uppercase" style={{fontSize:"13px"}}>
             {cateData.find(item => item.cate === props.cate).name}
         </Link>
+        <Speech text={speakContent}/>
         <h3 className="respon2" style={{marginTop:"20px", marginBottom:"20px"}}>
             {content.title}
         </h3>
@@ -33,7 +34,6 @@ function NewContent(props) {
 										{content.date}
 									</span>
 								</span>
-            <Speech text={speakContent}/>
         </div>
         <h5 className={"sapo"} style={{marginTop:"10px"}}>{content.sapo}</h5>
 
@@ -56,6 +56,7 @@ function FacebookShare() {
     const handleFbShare = () => {
         // Lấy url của tin tức muốn chia sẻ
         const urlToShare = "https://nld.com.vn" + sessionStorage.getItem("link");
+        // const urlToShare = "https://nld-frontend.web.app" + sessionStorage.getItem("link");
         const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(urlToShare)}`;
         window.open(facebookShareUrl, '_blank');
     };
@@ -74,6 +75,7 @@ function TwitterShare() {
     const ShareTwitterButton = () => {
         // Lấy URL của tin tức muốn chia sẻ
         const urlToShare = "https://nld.com.vn" + sessionStorage.getItem("link");
+        // const urlToShare = "https://nld-frontend.web.app" + sessionStorage.getItem("link");
         const twitterShareUrl = `https://twitter.com/share?url=${encodeURIComponent(urlToShare)}`;
         window.open(twitterShareUrl, '_blank');
     };
