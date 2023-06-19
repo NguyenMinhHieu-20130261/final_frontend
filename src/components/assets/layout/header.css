@@ -1,0 +1,28 @@
+/*.header-right-btn{*/
+/*    display: flex; !important;*/
+/*}*/
+.magnify{
+    margin-right: 15px ;
+}
+.search-bar{
+    padding: 0 10px;
+}
+.search-item{
+    border:1px solid black;
+    background-color: white;
+    width: 220px;
+}
+.result-search-text{
+    margin-bottom: 0 !important;
+}
+.search-item :hover p{
+    font-weight: bold;
+    background-color: rgba(140, 140, 140, 0.50);
+    color: #3b3b3b;
+}
+.result-search a{
+    padding: 0 !important;
+}
+.search-item p{
+    padding: 5px !important;
+}
